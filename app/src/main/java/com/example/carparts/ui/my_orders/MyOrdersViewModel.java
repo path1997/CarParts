@@ -1,16 +1,16 @@
-package com.example.carparts.ui.tools;
+package com.example.carparts.ui.my_orders;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ToolsViewModel extends ViewModel {
+public class MyOrdersViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ToolsViewModel() {
+    public MyOrdersViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is tools fragment");
+        mText.setValue("This is My Orders fragment");
     }
 
     public LiveData<String> getText() {
