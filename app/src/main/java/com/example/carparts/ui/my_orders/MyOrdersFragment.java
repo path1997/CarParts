@@ -1,4 +1,4 @@
-package com.example.carparts.ui.share;
+package com.example.carparts.ui.my_orders;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.carparts.R;
 
-public class ShareFragment extends Fragment {
+public class MyOrdersFragment extends Fragment {
 
-    private ShareViewModel shareViewModel;
+    private MyOrdersViewModel myOrdersViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        shareViewModel =
-                ViewModelProviders.of(this).get(ShareViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_share, container, false);
-        final TextView textView = root.findViewById(R.id.text_share);
-        shareViewModel.getText().observe(this, new Observer<String>() {
+        myOrdersViewModel =
+                ViewModelProviders.of(this).get(MyOrdersViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_my_orders, container, false);
+        final TextView textView = root.findViewById(R.id.text_my_orders);
+        myOrdersViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

@@ -1,4 +1,4 @@
-package com.example.carparts.ui.send;
+package com.example.carparts.ui.add_announcement;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.carparts.R;
 
-public class SendFragment extends Fragment {
+public class AddAnnouncementFragment extends Fragment {
 
-    private SendViewModel sendViewModel;
+    private AddAnnouncementViewModel addAnnouncementViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sendViewModel =
-                ViewModelProviders.of(this).get(SendViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_send, container, false);
-        final TextView textView = root.findViewById(R.id.text_send);
-        sendViewModel.getText().observe(this, new Observer<String>() {
+        addAnnouncementViewModel =
+                ViewModelProviders.of(this).get(AddAnnouncementViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_add_announcement, container, false);
+        final TextView textView = root.findViewById(R.id.text_add_announcement);
+        addAnnouncementViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

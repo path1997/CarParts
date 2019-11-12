@@ -12,32 +12,42 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_login"
         android:name="com.example.carparts.ui.login.LoginFragment"
         android:label="@string/menu_login"
         tools:layout="@layout/fragment_login" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_category"
         android:name="com.example.carparts.ui.category.CategoryFragment"
         android:label="@string/menu_category"
         tools:layout="@layout/fragment_category" />
 
     <fragment
-        android:id="@+id/nav_tools"
+        android:id="@+id/nav_my_orders"
         android:name="com.example.carparts.ui.my_orders.MyOrdersFragment"
         android:label="@string/menu_my_orders"
         tools:layout="@layout/fragment_my_orders" />
 
     <fragment
-        android:id="@+id/nav_share"
+        android:id="@+id/nav_all_announcement"
         android:name="com.example.carparts.ui.all_announcement.AllAnnouncementFragment"
         android:label="@string/menu_all_announcement"
         tools:layout="@layout/fragment_all_announcement" />
 
     <fragment
-        android:id="@+id/nav_send"
+        android:id="@+id/nav_add_announcement"
         android:name="com.example.carparts.ui.add_announcement.AddAnnouncementFragment"
         android:label="@string/menu_add_announcement"
         tools:layout="@layout/fragment_add_announcement" />
+    <fragment
+        android:id="@+id/nav_my_announcement"
+        android:name="com.example.carparts.ui.my_announcement.MyAnnouncementFragment"
+        android:label="@string/menu_my_announcement"
+        tools:layout="@layout/fragment_my_announcement" />
+    <fragment
+        android:id="@+id/nav_contact"
+        android:name="com.example.carparts.ui.contact.ContactFragment"
+        android:label="@string/menu_contact"
+        tools:layout="@layout/fragment_contact" />
 </navigation>

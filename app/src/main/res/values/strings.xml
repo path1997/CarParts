@@ -13,4 +13,6 @@
     <string name="menu_my_orders">My Orders</string>
     <string name="menu_all_announcement">All Announcement</string>
     <string name="menu_add_announcement">Add Announcement</string>
+    <string name="menu_my_announcement">My Announcement</string>
+    <string name="menu_contact">Contact</string>
 </resources>
