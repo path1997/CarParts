@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -24,6 +26,7 @@ import com.example.carparts.RequestHandler;
 import com.example.carparts.SharedPrefManager;
 import com.example.carparts.URLs;
 import com.example.carparts.User;
+import com.example.carparts.ui.home.HomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,12 +92,12 @@ public class LoginFragment extends Fragment {
 
             ProgressBar progressBar;
 
-            /*@Override
+            @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
-            }*/
+            }
 
             @Override
             protected void onPostExecute(String s) {
@@ -125,8 +128,11 @@ public class LoginFragment extends Fragment {
                         SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
 
                         //starting the profile activity
-                        getActivity().finish();
-                        //startActivity(new Intent(getActivity().getApplicationContext(), ProfileActivity.class));
+                        //getActivity().finish();
+
+                        FragmentTransaction fr = getFragmentManager().beginTransaction();
+                        fr.replace(R.id.nav_host_fragment, new HomeFragment());
+                        fr.commit();
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
                     }
