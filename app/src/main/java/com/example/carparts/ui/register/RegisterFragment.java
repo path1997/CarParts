@@ -1,4 +1,4 @@
-package com.example.carparts.ui.login;
+package com.example.carparts.ui.register;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,10 +36,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class LoginFragment extends Fragment {
+public class RegisterFragment extends Fragment {
 
-    private LoginViewModel loginViewModel;
-    EditText editTextUsername, editTextPassword;
+    EditText editTextUsername, editTextEmail, editTextPassword;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,59 +46,90 @@ public class LoginFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_register, container, false);
         super.onCreate(savedInstanceState);
 
-        editTextUsername = (EditText) root.findViewById(R.id.editTextPassword);
-        editTextPassword = (EditText) root.findViewById(R.id.editTextPassword);
+        editTextUsername = (EditText) getActivity().findViewById(R.id.editTextUsername);
+        editTextEmail = (EditText) getActivity().findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) getActivity().findViewById(R.id.editTextPassword);
 
 
-        //if user presses on login
-        //calling the method login
-        root.findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
+        getActivity().findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userLogin();
+                //if user pressed on button register
+                //here we will register the user to server
+                registerUser();
             }
         });
 
-        //if user presses on not registered
-        root.findViewById(R.id.textViewRegister).setOnClickListener(new View.OnClickListener() {
+        getActivity().findViewById(R.id.textViewLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //open register screen
-                Fragment fragment = new com.example.carparts.ui.login.RegisterFragment();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.nav_host_fragment, fragment);
-                ft.commit();
+                //if user pressed on login
+                //we will open the login screen
+                NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+                navigationView.getMenu().performIdentifierAction(R.id.nav_login, 0);
             }
         });
         return root;
-    }
-    private void userLogin() {
-        //first getting the values
-        final String username = editTextUsername.getText().toString();
-        final String password = editTextPassword.getText().toString();
 
-        //validating inputs
+    }
+
+    private void registerUser() {
+        final String username = editTextUsername.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
+
+
+        //first we will do the validations
+
         if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter your username");
+            editTextUsername.setError("Please enter username");
             editTextUsername.requestFocus();
             return;
         }
 
+        if (TextUtils.isEmpty(email)) {
+            editTextEmail.setError("Please enter your email");
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editTextEmail.setError("Enter a valid email");
+            editTextEmail.requestFocus();
+            return;
+        }
+
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Please enter your password");
+            editTextPassword.setError("Enter a password");
             editTextPassword.requestFocus();
             return;
         }
 
-        //if everything is fine
+        //if it passes all the validations
 
-        class UserLogin extends AsyncTask<Void, Void, String> {
+        class RegisterUser extends AsyncTask<Void, Void, String> {
 
-            ProgressBar progressBar;
+            private ProgressBar progressBar;
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("email", email);
+                params.put("password", password);
+
+                //returing the response
+                return requestHandler.sendPostRequest(URLs.URL_REGISTER, params);
+            }
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                //displaying the progress bar while user registers on the server
                 progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
             }
@@ -105,8 +137,8 @@ public class LoginFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                //progressBar.setVisibility(View.GONE);
-
+                //hiding the progressbar after completion
+                progressBar.setVisibility(View.GONE);
 
                 try {
                     //converting response to json object
@@ -130,33 +162,19 @@ public class LoginFragment extends Fragment {
                         SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
 
                         //starting the profile activity
-                        //getActivity().finish();
-                        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
-                        navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
+
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Some error occurred", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
-
-                //creating request parameters
-                HashMap<String, String> params = new HashMap<>();
-                params.put("username", username);
-                params.put("password", password);
-
-                //returing the response
-                return requestHandler.sendPostRequest(URLs.URL_LOGIN, params);
-            }
         }
 
-        UserLogin ul = new UserLogin();
-        ul.execute();
+        //executing the async task
+        RegisterUser ru = new RegisterUser();
+        ru.execute();
     }
+
 }

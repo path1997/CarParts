@@ -2,6 +2,12 @@ package com.example.carparts;
 
 import android.os.Bundle;
 
+import com.example.carparts.ui.add_announcement.AddAnnouncementFragment;
+import com.example.carparts.ui.all_announcement.AllAnnouncementFragment;
+import com.example.carparts.ui.category.CategoryFragment;
+import com.example.carparts.ui.contact.ContactFragment;
+import com.example.carparts.ui.home.HomeFragment;
+import com.example.carparts.ui.login.LoginFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -9,6 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -43,6 +53,75 @@ public class MainActivity extends AppCompatActivity {
         });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+       /* final Fragment[] fragment = {null};
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id = menuItem.getItemId();
+
+                String title = getString(R.string.app_name);
+                switch (id) {
+                    case R.id.nav_home: {
+                        fragment[0] = new HomeFragment();
+                        title = "Home";
+                        break;
+                    }
+                    case R.id.nav_add_announcement: {
+                        fragment[0] = new AddAnnouncementFragment();
+                        title = "Add announcement";
+                        break;
+                    }
+
+                    case R.id.nav_all_announcement: {
+                        fragment[0] = new AllAnnouncementFragment();
+                        title = "All announcement";
+                        break;
+                    }
+
+                    case R.id.nav_category: {
+                        fragment[0] = new CategoryFragment();
+                        title = "Category";
+                        break;
+                    }
+                    case R.id.nav_contact: {
+                        fragment[0] = new ContactFragment();
+                        title = "Contact";
+                        break;
+                    }
+                    case R.id.nav_login: {
+                        title = "Login/Register";
+                        fragment[0] = new LoginFragment();
+                        break;
+                    }
+                    case R.id.nav_contact: {
+                        fragment[0] = new Contact();
+                        title = "Contact";
+                        break;
+                    }
+                    case R.id.nav_login: {
+                        title = "";
+                        Intent myIntent = new Intent(MainActivity.this, HomeActivity.class);
+                        startActivity(myIntent);
+                        break;
+                    }
+
+                    default:
+                        return true;
+                }
+                if (fragment[0] != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.nav_host_fragment, fragment[0]);
+                    ft.commit();
+                }
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setTitle(title);
+                }
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });*/
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
