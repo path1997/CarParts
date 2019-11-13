@@ -6,19 +6,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_login"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_login"
             android:title="@string/menu_login" />
         <item
             android:id="@+id/nav_category"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_category"
             android:title="@string/menu_category" />
         <item
             android:id="@+id/nav_my_orders"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_my_orders"
             android:title="@string/menu_my_orders" />
     </group>
 
@@ -26,19 +26,19 @@
         <menu>
             <item
                 android:id="@+id/nav_all_announcement"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_menu_all_announcement"
                 android:title="@string/menu_all_announcement" />
             <item
                 android:id="@+id/nav_add_announcement"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_menu_add_announcement"
                 android:title="@string/menu_add_announcement" />
             <item
                 android:id="@+id/nav_my_announcement"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_menu_my_announcement"
                 android:title="@string/menu_my_announcement" />
             <item
                 android:id="@+id/nav_contact"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_menu_contact"
                 android:title="@string/menu_contact" />
         </menu>
     </item>
