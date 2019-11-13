@@ -27,6 +27,7 @@ import com.example.carparts.SharedPrefManager;
 import com.example.carparts.URLs;
 import com.example.carparts.User;
 import com.example.carparts.ui.home.HomeFragment;
+import com.example.carparts.ui.register.RegisterFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
@@ -42,7 +43,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_register, container, false);
+        View root = inflater.inflate(R.layout.fragment_login, container, false);
         super.onCreate(savedInstanceState);
 
         editTextUsername = (EditText) root.findViewById(R.id.editTextPassword);
@@ -63,10 +64,9 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //open register screen
-                Fragment fragment = new com.example.carparts.ui.login.RegisterFragment();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.nav_host_fragment, fragment);
-                ft.commit();
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                fr.replace(R.id.nav_host_fragment, new RegisterFragment());
+                fr.commit();
             }
         });
         return root;

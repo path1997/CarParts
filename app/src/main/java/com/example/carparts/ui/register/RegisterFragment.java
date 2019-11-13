@@ -45,13 +45,12 @@ public class RegisterFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_register, container, false);
         super.onCreate(savedInstanceState);
+        editTextUsername = (EditText) root.findViewById(R.id.editTextUsername);
+        editTextEmail = (EditText) root.findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) root.findViewById(R.id.editTextPassword);
 
-        editTextUsername = (EditText) getActivity().findViewById(R.id.editTextUsername);
-        editTextEmail = (EditText) getActivity().findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) getActivity().findViewById(R.id.editTextPassword);
 
-
-        getActivity().findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
+        root.findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if user pressed on button register
@@ -60,15 +59,18 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        getActivity().findViewById(R.id.textViewLogin).setOnClickListener(new View.OnClickListener() {
+        root.findViewById(R.id.textViewLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //if user pressed on login
                 //we will open the login screen
+                //getActivity().finish();
+                //startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
                 navigationView.getMenu().performIdentifierAction(R.id.nav_login, 0);
             }
         });
+
         return root;
 
     }
