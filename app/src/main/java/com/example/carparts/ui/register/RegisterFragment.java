@@ -164,6 +164,8 @@ public class RegisterFragment extends Fragment {
                         SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
 
                         //starting the profile activity
+                        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+                        navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
 
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Some error occurred", Toast.LENGTH_SHORT).show();
