@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CategoryFragment extends Fragment {
@@ -57,7 +60,8 @@ public class CategoryFragment extends Fragment {
                 progressBar = (ProgressBar) root.findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
             }
-
+            private ArrayList<String> arrayList;
+            private ArrayAdapter<String> adapter;
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -74,23 +78,26 @@ public class CategoryFragment extends Fragment {
 
                         //getting the user from the response
                         JSONArray jsonArray = obj.getJSONArray("category");
-                        final TextView[] tv = new TextView[jsonArray.length()];
-                        final RelativeLayout rl = (RelativeLayout) getActivity().findViewById(R.id.rl);
-                        final TextView podpis= new TextView(getActivity().getApplicationContext());
+                        //final TextView[] tv = new TextView[jsonArray.length()];
+                        //final RelativeLayout rl = (RelativeLayout) getActivity().findViewById(R.id.rl);
+                        //final TextView podpis= new TextView(getActivity().getApplicationContext());
 /*                        podpis.setPadding(20, 15, 10, 15);
                         podpis.setTextSize((float) 20);
                         podpis.setText("Kategorie");
                         rl.addView(podpis);*/
+                        ListView listView=(ListView) getActivity().findViewById(R.id.rl);
+
+                        arrayList = new ArrayList<String>();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject category = jsonArray.getJSONObject(i);
 
                             String name = category.getString("name");
+                            arrayList.add(name);
                             /*int age = employee.getInt("age");
                             String mail = employee.getString("mail");
-
                             mTextViewResult.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");*/
-                            tv[i] = new TextView(getActivity().getApplicationContext());
-                            RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams
+                            //tv[i] = new TextView(getActivity().getApplicationContext());
+                            /*RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams
                                     ((int) RelativeLayout.LayoutParams.MATCH_PARENT,(int) RelativeLayout.LayoutParams.WRAP_CONTENT);
                             params.topMargin  = (i)*100;
                             params.bottomMargin  = (i+1)*100;
@@ -98,20 +105,14 @@ public class CategoryFragment extends Fragment {
                             tv[i].setText(name);
                             tv[i].setTextSize((float) 20);
                             tv[i].setPadding(20, 15, 10, 15);
-                            tv[i].setLayoutParams(params);
-
-                            rl.addView(tv[i]);
+                            tv[i].setLayoutParams(params);*/
                         }
+                        adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
+                        listView.setAdapter(adapter);
 
-                        //creating a new user object
-                        /*User user = new User(
-                                userJson.getInt("id"),
-                                userJson.getString("username"),
-                                userJson.getString("email")
-                        );
 
                         //storing the user in shared preferences
-                        SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);*/
+                        /*SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);*/
                         System.out.println("udalo sie");
                         //starting the profile activity
                         /*NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
