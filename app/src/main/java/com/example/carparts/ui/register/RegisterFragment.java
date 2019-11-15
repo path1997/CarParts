@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -162,10 +164,16 @@ public class RegisterFragment extends Fragment {
 
                         //storing the user in shared preferences
                         SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
-
+                        System.out.println(SharedPrefManager.getInstance(getActivity().getApplicationContext()).isLoggedIn());
                         //starting the profile activity
                         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
                         navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
+                        Menu menu = navigationView.getMenu();
+                        MenuItem nav_login = menu.findItem(R.id.nav_login);
+                        nav_login.setTitle("Logout");
+                        View header = navigationView.getHeaderView(0);
+                        TextView textView= (TextView) header.findViewById(R.id.textView);
+                        textView.setText("Hi "+username);
 
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Some error occurred", Toast.LENGTH_SHORT).show();

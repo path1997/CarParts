@@ -1,10 +1,13 @@
 package com.example.carparts.ui.category;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -18,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.carparts.ProductList;
 import com.example.carparts.R;
 import com.example.carparts.RequestHandler;
 import com.example.carparts.SharedPrefManager;
@@ -47,6 +51,7 @@ public class CategoryFragment extends Fragment {
     }
     private void categoryList() {
         System.out.println("jestem");
+
         class CategoryList extends AsyncTask<Void, Void, String> {
 
             private ProgressBar progressBar;
@@ -61,7 +66,8 @@ public class CategoryFragment extends Fragment {
                 progressBar.setVisibility(View.VISIBLE);
             }
             private ArrayList<String> arrayList;
-            private ArrayAdapter<String> adapter;
+
+
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -85,7 +91,7 @@ public class CategoryFragment extends Fragment {
                         podpis.setTextSize((float) 20);
                         podpis.setText("Kategorie");
                         rl.addView(podpis);*/
-                        ListView listView=(ListView) getActivity().findViewById(R.id.rl);
+                        final ListView listView=(ListView) getActivity().findViewById(R.id.rl);
 
                         arrayList = new ArrayList<String>();
                         for (int i = 0; i < jsonArray.length(); i++) {
@@ -107,8 +113,26 @@ public class CategoryFragment extends Fragment {
                             tv[i].setPadding(20, 15, 10, 15);
                             tv[i].setLayoutParams(params);*/
                         }
-                        adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
-                        listView.setAdapter(adapter);
+                        ArrayAdapter<String> aAdaptor = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.custom_layout, arrayList ) {
+
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent) {
+
+                                TextView textView = (TextView) super.getView(position, convertView, parent);
+
+                                return textView;
+                            }
+                        };
+                        listView.setAdapter( aAdaptor );
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(getActivity().getApplicationContext(), ProductList.class);
+                                String item = arrayList.get(position);
+                                intent.putExtra("name_cat", item);
+                                startActivity(intent);
+                            }
+                        });
 
 
                         //storing the user in shared preferences
