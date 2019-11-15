@@ -47,7 +47,7 @@ public class SharedPrefManager {
     }
 
     //this method will checker whether user is already logged in or not
-    public boolean isLoggedIn() {
+    public static boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_USERNAME, null) != null;
     }
@@ -62,12 +62,17 @@ public class SharedPrefManager {
         );
     }
 
+    public static String getUserName() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_USERNAME, null);
+    }
+
     //this method will logout the user
-    public void logout() {
+    public static void logout() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        mCtx.startActivity(new Intent(mCtx, LoginFragment.class));
+        //mCtx.startActivity(new Intent(mCtx, LoginFragment.class));
     }
 }

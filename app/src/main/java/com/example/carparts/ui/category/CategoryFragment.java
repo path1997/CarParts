@@ -77,10 +77,10 @@ public class CategoryFragment extends Fragment {
                         final TextView[] tv = new TextView[jsonArray.length()];
                         final RelativeLayout rl = (RelativeLayout) getActivity().findViewById(R.id.rl);
                         final TextView podpis= new TextView(getActivity().getApplicationContext());
-                        podpis.setPadding(20, 15, 10, 15);
+/*                        podpis.setPadding(20, 15, 10, 15);
                         podpis.setTextSize((float) 20);
                         podpis.setText("Kategorie");
-                        rl.addView(podpis);
+                        rl.addView(podpis);*/
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject category = jsonArray.getJSONObject(i);
 
@@ -92,13 +92,14 @@ public class CategoryFragment extends Fragment {
                             tv[i] = new TextView(getActivity().getApplicationContext());
                             RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams
                                     ((int) RelativeLayout.LayoutParams.MATCH_PARENT,(int) RelativeLayout.LayoutParams.WRAP_CONTENT);
-                            params.topMargin  = (i+1)*100;
+                            params.topMargin  = (i)*100;
                             params.bottomMargin  = (i+1)*100;
                             tv[i].setBackgroundResource(R.drawable.border);
                             tv[i].setText(name);
                             tv[i].setTextSize((float) 20);
                             tv[i].setPadding(20, 15, 10, 15);
                             tv[i].setLayoutParams(params);
+
                             rl.addView(tv[i]);
                         }
 

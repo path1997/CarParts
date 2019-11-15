@@ -32,6 +32,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
         /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +59,19 @@ public class MainActivity extends AppCompatActivity {
         });*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        MenuItem nav_login = menu.findItem(R.id.nav_login);
+        View header = navigationView.getHeaderView(0);
+        TextView textView= (TextView) header.findViewById(R.id.textView);
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            //textView.setText("Witaj "+SharedPrefManager.getUserName());
+            textView.setText("Hi "+ SharedPrefManager.getUserName());
+            nav_login.setTitle("Logout");
+
+        } else {
+            textView.setText("You are not logged in");
+        }
+
        /* final Fragment[] fragment = {null};
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
