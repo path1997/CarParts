@@ -44,7 +44,7 @@ public class LoginFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_login, container, false);
-        super.onCreate(savedInstanceState);
+        /*super.onCreate(savedInstanceState);*/
 
         editTextUsername = (EditText) root.findViewById(R.id.editTextPassword);
         editTextPassword = (EditText) root.findViewById(R.id.editTextPassword);
