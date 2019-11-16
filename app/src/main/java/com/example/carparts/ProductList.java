@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,9 +29,10 @@ public class ProductList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
-        //textView= findViewById(R.id.textView2);
         Bundle extras = getIntent().getExtras();
         category=extras.getString("name_cat");
+        setTitle(category);
+        //textView= findViewById(R.id.textView2);
         //textView.setText(category);
         getProducts();
     }
