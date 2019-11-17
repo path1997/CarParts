@@ -28,12 +28,13 @@ public class ContactFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
         String [] contacts = {"Call to us", "Write to us", "Find us"};
+        Integer[] imgid = {R.drawable.ic_contact_call,R.drawable.ic_contact_email,R.drawable.ic_contact_navigation};
 
         ListView listView = (ListView) view.findViewById(R.id.lv_contact);
+        ContactCustomListView contactCustomListView = new ContactCustomListView(getActivity(),contacts,imgid);
+        //ArrayAdapter<String> ListViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_expandable_list_item_1, contacts);
 
-        ArrayAdapter<String> ListViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_expandable_list_item_1, contacts);
-
-        listView.setAdapter(ListViewAdapter);
+        listView.setAdapter(contactCustomListView);
 
         return view;
     }
