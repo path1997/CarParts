@@ -3,6 +3,7 @@ package com.example.carparts.ui.home;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.carparts.ProductList;
@@ -33,13 +36,14 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     View view=null;
-
+    ActionBar actionBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         view= inflater.inflate(R.layout.fragment_home, container, false);
 
+        actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         getHome();
         return view;
     }
@@ -47,13 +51,23 @@ public class HomeFragment extends Fragment {
     public void getHome(){
 
         class HomeList extends AsyncTask<Void, Void, String> {
-
+            private ImageView imageView;
             private ArrayList<String> arrayList;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                /*actionBar.hide();
+                imageView=(ImageView) view.findViewById(R.id.imagelogo);
+                imageView.setVisibility(View.VISIBLE);*/
+            }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-
+                /*SystemClock.sleep(600);
+                actionBar.show();
+                imageView=(ImageView) view.findViewById(R.id.imagelogo);
+                imageView.setVisibility(View.GONE);*/
 
                 try{
 

@@ -9,5 +9,6 @@ public class URLs {
     public static final String URL_CATEGORY= "http://masticable-stapler.000webhostapp.com/android/products.php?apicall=category";
     public static final String URL_PRODUCTLIST= "http://masticable-stapler.000webhostapp.com/android/products.php?apicall=productlist";
     public static final String URL_PRODUCTLISTFORHOME= "http://masticable-stapler.000webhostapp.com/android/products.php?apicall=productlistforhome";
+    public static final String URL_PRODUCTDETAIL= "http://masticable-stapler.000webhostapp.com/android/products.php?apicall=productdetail";
     public static final String URL_PPHOTO= "http://masticable-stapler.000webhostapp.com/photo/";
 }

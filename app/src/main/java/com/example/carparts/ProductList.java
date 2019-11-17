@@ -40,7 +40,7 @@ public class ProductList extends AppCompatActivity {
         class UserLogin extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
-
+            private String ida[];
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -65,11 +65,13 @@ public class ProductList extends AppCompatActivity {
                         //getting the user from the response
                         JSONArray jsonArray = obj.getJSONArray("products");
 
+                        ida = new String[jsonArray.length()];
                         String[] name = new String[jsonArray.length()];
                         String[] path = new String[jsonArray.length()];
                         String[] price = new String[jsonArray.length()];
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject category = jsonArray.getJSONObject(i);
+                            ida[i]= category.getString("id");
                             name[i]= category.getString("name");
                             path[i]= category.getString("path");
                             price[i]= category.getString("price");
@@ -94,6 +96,16 @@ public class ProductList extends AppCompatActivity {
                         final ListView listView=(ListView) findViewById(R.id.listview);
                         customadapter = new ProductListCustomAdapter(ProductList.this,name,path,price );
                         listView.setAdapter(customadapter);
+
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(getApplicationContext(), ProductDetail.class);
+                                String idP=ida[position];
+                                intent.putExtra("id_product", idP);
+                                startActivity(intent);
+                            }
+                        });
 
                         //arrayList = new ArrayList<String>();
                         /*for (int i = 0; i < jsonArray.length(); i++) {
