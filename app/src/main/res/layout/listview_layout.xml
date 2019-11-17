@@ -20,26 +20,26 @@
 
         <TextView
             android:id="@+id/txname"
-            android:layout_width="157dp"
+            android:layout_width="183dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="13dp"
-            android:layout_marginEnd="128dp"
+            android:layout_marginEnd="84dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
             android:textSize="20dp" />
 
         <TextView
             android:id="@+id/txprice"
-            android:layout_width="146dp"
+            android:layout_width="184dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txname"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="125dp"
+            android:layout_marginEnd="83dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
             android:textSize="20dp" />

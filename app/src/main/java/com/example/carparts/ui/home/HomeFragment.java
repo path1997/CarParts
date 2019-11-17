@@ -1,34 +1,103 @@
 package com.example.carparts.ui.home;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
+import com.example.carparts.ProductList;
+import com.example.carparts.ProductListCustomAdapter;
 import com.example.carparts.R;
+import com.example.carparts.RequestHandler;
 import com.example.carparts.SharedPrefManager;
-import com.example.carparts.ui.login.LoginFragment;
+import com.example.carparts.URLs;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    View view=null;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root= inflater.inflate(R.layout.fragment_home, container, false);
-        setHasOptionsMenu(true);
-        if (SharedPrefManager.getInstance(getContext()).isLoggedIn()) {
-            System.out.println("jest zalogowany");
 
-        }
-        return root;
+        view= inflater.inflate(R.layout.fragment_home, container, false);
+
+        getHome();
+        return view;
     }
+
+    public void getHome(){
+
+        class HomeList extends AsyncTask<Void, Void, String> {
+
+            private ArrayList<String> arrayList;
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+
+
+                try{
+
+
+                    JSONObject obj = new JSONObject(s);
+                    if(!obj.getBoolean("error")){
+                        Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        JSONArray jsonArray = obj.getJSONArray("productlistforhome");
+
+
+                        String[] name = new String[jsonArray.length()];
+                        String[] path = new String[jsonArray.length()];
+                        String[] price = new String[jsonArray.length()];
+                        for(int i=0;i<jsonArray.length();i++) {
+                            JSONObject producthome = jsonArray.getJSONObject(i);
+                            name[i]= producthome.getString("name");
+                            path[i]= producthome.getString("path");
+                            price[i]= producthome.getString("price");
+                        }
+
+                        ProductListCustomAdapter customadapter1;
+                        final ListView listView=(ListView) getActivity().findViewById(R.id.lv_home);
+                        customadapter1 = new ProductListCustomAdapter(getActivity(),name,path,price );
+                        listView.setAdapter(customadapter1);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+                System.out.println("zapytalo");
+                //returing the response
+                return requestHandler.sendPostRequest(URLs.URL_PRODUCTLISTFORHOME);
+            }
+        }
+        HomeList hl = new HomeList();
+        hl.execute();
+        }
+
 }
