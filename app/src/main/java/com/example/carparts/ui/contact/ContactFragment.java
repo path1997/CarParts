@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.carparts.Geolocation;
 import com.example.carparts.ProductList;
 import com.example.carparts.R;
 
@@ -60,7 +61,8 @@ public class ContactFragment extends Fragment {
                     }
                 }
                 if (position == 2) {
-                    //TODO: dodanie odwolania do activity
+                    Intent intent = new Intent(getActivity().getApplicationContext(), Geolocation.class);
+                    startActivity(intent);
                 }
             }
         });
