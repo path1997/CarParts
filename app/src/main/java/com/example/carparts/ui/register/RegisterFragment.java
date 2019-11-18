@@ -1,5 +1,6 @@
 package com.example.carparts.ui.register;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -41,11 +43,11 @@ import java.util.HashMap;
 public class RegisterFragment extends Fragment {
 
     EditText editTextUsername, editTextEmail, editTextPassword;
-
+    View root;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_register, container, false);
+        root = inflater.inflate(R.layout.fragment_register, container, false);
         super.onCreate(savedInstanceState);
         editTextUsername = (EditText) root.findViewById(R.id.editTextUsername);
         editTextEmail = (EditText) root.findViewById(R.id.editTextEmail);
@@ -174,6 +176,8 @@ public class RegisterFragment extends Fragment {
                         View header = navigationView.getHeaderView(0);
                         TextView textView= (TextView) header.findViewById(R.id.textView);
                         textView.setText("Hi "+username);
+                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
 
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Some error occurred", Toast.LENGTH_SHORT).show();

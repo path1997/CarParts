@@ -1,5 +1,6 @@
 package com.example.carparts.ui.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,13 +40,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class LoginFragment extends Fragment {
-
+    View root;
     private LoginViewModel loginViewModel;
     EditText editTextUsername, editTextPassword;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root;
+
         if(SharedPrefManager.isLoggedIn()){
             root = inflater.inflate(R.layout.fragment_login, container, false);
             SharedPrefManager.getInstance(getActivity().getApplicationContext()).logout();
@@ -115,7 +117,6 @@ public class LoginFragment extends Fragment {
         //if everything is fine
 
         class UserLogin extends AsyncTask<Void, Void, String> {
-
             ProgressBar progressBar;
 
             @Override
@@ -162,6 +163,9 @@ public class LoginFragment extends Fragment {
                         View header = navigationView.getHeaderView(0);
                         TextView textView= (TextView) header.findViewById(R.id.textView);
                         textView.setText("Hi "+username);
+                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
+
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
                     }

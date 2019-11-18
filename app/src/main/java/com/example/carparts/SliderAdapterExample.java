@@ -55,7 +55,6 @@ public class SliderAdapterExample extends
 
         switch (position) {
             case 0:
-                viewHolder.textViewDescription.setText("This is slider item " + position);
                 viewHolder.textViewDescription.setTextSize(16);
                 viewHolder.textViewDescription.setTextColor(Color.WHITE);
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
@@ -65,7 +64,6 @@ public class SliderAdapterExample extends
                         .into(viewHolder.imageViewBackground);
                 break;
             case 1:
-                viewHolder.textViewDescription.setText("This is slider item " + position);
                 viewHolder.textViewDescription.setTextSize(16);
                 viewHolder.textViewDescription.setTextColor(Color.WHITE);
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
@@ -75,7 +73,6 @@ public class SliderAdapterExample extends
                         .into(viewHolder.imageViewBackground);
                 break;
             case 2:
-                viewHolder.textViewDescription.setText("This is slider item " + position);
                 viewHolder.textViewDescription.setTextSize(16);
                 viewHolder.textViewDescription.setTextColor(Color.WHITE);
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
