@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -30,7 +31,6 @@ public class ProductDetail extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
         Bundle extras = getIntent().getExtras();
         id_product=extras.getString("id_product");
-        setTitle(id_product);
         getDetails();
     }
     private void getDetails() {
@@ -71,7 +71,7 @@ public class ProductDetail extends AppCompatActivity {
                             description[i]= category.getString("description");
                             price[i]= category.getString("price");
                         }
-
+                        setTitle(name[0]);
                         jsonArray = obj.getJSONArray("productphotos");
                         //v_flipper= findViewById(R.id.v_flipper);
                         String[] path = new String[jsonArray.length()];
@@ -89,6 +89,14 @@ public class ProductDetail extends AppCompatActivity {
 
                         sliderView.setSliderAdapter(adapter);
                         sliderView.setAutoCycle(false);
+
+                        TextView tvTitle= (TextView) findViewById(R.id.tvTitle);
+                        TextView tvDescription= (TextView) findViewById(R.id.tvDesc);
+                        TextView tvPrice= (TextView) findViewById(R.id.tvPrice);
+                        tvTitle.setText(name[0]);
+                        tvDescription.setText(description[0]);
+                        tvPrice.setText("Cena: "+price[0]+"zł");
+
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();

@@ -1,12 +1,14 @@
 package com.example.carparts.ui.home;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,6 +21,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.carparts.ProductDetail;
 import com.example.carparts.ProductList;
 import com.example.carparts.ProductListCustomAdapter;
 import com.example.carparts.R;
@@ -51,6 +54,7 @@ public class HomeFragment extends Fragment {
     public void getHome(){
 
         class HomeList extends AsyncTask<Void, Void, String> {
+            private String ida[];
             private ImageView imageView;
             private ArrayList<String> arrayList;
             @Override
@@ -77,12 +81,13 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         JSONArray jsonArray = obj.getJSONArray("productlistforhome");
 
-
+                        ida=new String[jsonArray.length()];;
                         String[] name = new String[jsonArray.length()];
                         String[] path = new String[jsonArray.length()];
                         String[] price = new String[jsonArray.length()];
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject producthome = jsonArray.getJSONObject(i);
+                            ida[i]= producthome.getString("id");
                             name[i]= producthome.getString("name");
                             path[i]= producthome.getString("path");
                             price[i]= producthome.getString("price");
@@ -92,6 +97,16 @@ public class HomeFragment extends Fragment {
                         final ListView listView=(ListView) getActivity().findViewById(R.id.lv_home);
                         customadapter1 = new ProductListCustomAdapter(getActivity(),name,path,price );
                         listView.setAdapter(customadapter1);
+
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(getActivity().getApplicationContext(), ProductDetail.class);
+                                String idP=ida[position];
+                                intent.putExtra("id_product", idP);
+                                startActivity(intent);
+                            }
+                        });
 
                     }
 
