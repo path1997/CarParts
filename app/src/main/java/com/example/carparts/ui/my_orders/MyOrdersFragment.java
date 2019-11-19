@@ -20,16 +20,10 @@ public class MyOrdersFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        myOrdersViewModel =
-                ViewModelProviders.of(this).get(MyOrdersViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_my_orders, container, false);
-        final TextView textView = root.findViewById(R.id.text_my_orders);
-        myOrdersViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+
         return root;
     }
 }

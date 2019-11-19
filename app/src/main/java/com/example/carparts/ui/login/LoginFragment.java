@@ -30,6 +30,7 @@ import com.example.carparts.RequestHandler;
 import com.example.carparts.SharedPrefManager;
 import com.example.carparts.URLs;
 import com.example.carparts.User;
+import com.example.carparts.ui.change_password.ChangePasswordFragment;
 import com.example.carparts.ui.home.HomeFragment;
 import com.example.carparts.ui.register.RegisterFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -42,16 +43,39 @@ import java.util.HashMap;
 public class LoginFragment extends Fragment {
     View root;
     private LoginViewModel loginViewModel;
-    EditText editTextUsername, editTextPassword;
+    EditText Fname,SName,PhoneNumber,Email,PostCode,City,Address,Password;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         if(SharedPrefManager.isLoggedIn()){
             root = inflater.inflate(R.layout.fragment_myaccount, container, false);
+            Fname = (EditText) root.findViewById(R.id.FName);
+            SName = (EditText) root.findViewById(R.id.SName);
+            PhoneNumber = (EditText) root.findViewById(R.id.PhoneNumber);
+            Email = (EditText) root.findViewById(R.id.Email);
+            PostCode = (EditText) root.findViewById(R.id.PostCode);
+            City = (EditText) root.findViewById(R.id.City);
+            Address = (EditText) root.findViewById(R.id.Address);
+            loaddata();
 
 
 
+            root.findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    changedata();
+                }
+            });
+
+            root.findViewById(R.id.buttonChangePassword).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentTransaction fr = getFragmentManager().beginTransaction();
+                    fr.replace(R.id.nav_host_fragment, new ChangePasswordFragment());
+                    fr.commit();
+                }
+            });
 
             root.findViewById(R.id.buttonLogout).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,8 +96,8 @@ public class LoginFragment extends Fragment {
             root = inflater.inflate(R.layout.fragment_login, container, false);
             /*super.onCreate(savedInstanceState);*/
 
-            editTextUsername = (EditText) root.findViewById(R.id.editTextPassword);
-            editTextPassword = (EditText) root.findViewById(R.id.editTextPassword);
+            Email = (EditText) root.findViewById(R.id.Email);
+            Password = (EditText) root.findViewById(R.id.Password);
 
 
             //if user presses on login
@@ -101,19 +125,19 @@ public class LoginFragment extends Fragment {
     }
     private void userLogin() {
         //first getting the values
-        final String username = editTextUsername.getText().toString();
-        final String password = editTextPassword.getText().toString();
+        final String email = Email.getText().toString();
+        final String password = Password.getText().toString();
 
         //validating inputs
-        if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter your username");
-            editTextUsername.requestFocus();
+        if (TextUtils.isEmpty(email)) {
+            Email.setError("Please enter your username");
+            Email.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Please enter your password");
-            editTextPassword.requestFocus();
+            Password.setError("Please enter your password");
+            Password.requestFocus();
             return;
         }
 
@@ -149,8 +173,13 @@ public class LoginFragment extends Fragment {
                         //creating a new user object
                         User user = new User(
                                 userJson.getInt("id"),
-                                userJson.getString("username"),
-                                userJson.getString("email")
+                                userJson.getString("fname"),
+                                userJson.getString("sname"),
+                                userJson.getString("email"),
+                                userJson.getString("phone"),
+                                userJson.getString("postcode"),
+                                userJson.getString("city"),
+                                userJson.getString("address")
                         );
 
                         //storing the user in shared preferences
@@ -165,7 +194,7 @@ public class LoginFragment extends Fragment {
                         nav_login.setTitle("My account");
                         View header = navigationView.getHeaderView(0);
                         TextView textView= (TextView) header.findViewById(R.id.textView);
-                        textView.setText("Hi "+username);
+                        textView.setText("Hi "+user.getFname()+" "+user.getSname());
                         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
 
@@ -184,7 +213,7 @@ public class LoginFragment extends Fragment {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("username", username);
+                params.put("email", email);
                 params.put("password", password);
 
                 //returing the response
@@ -194,5 +223,146 @@ public class LoginFragment extends Fragment {
 
         UserLogin ul = new UserLogin();
         ul.execute();
+    }
+    private void changedata() {
+        //first getting the values
+        final String fname = Fname.getText().toString();
+        final String sname = SName.getText().toString();
+        final String phone = PhoneNumber.getText().toString();
+        final String email = Email.getText().toString();
+        final String postcode = PostCode.getText().toString();
+        final String city = City.getText().toString();
+        final String address = Address.getText().toString();
+
+        //validating inputs
+        if (TextUtils.isEmpty(fname)) {
+            Fname.setError("Please enter your first name");
+            Fname.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(sname)) {
+            SName.setError("Please enter your second name");
+            SName.requestFocus();
+            return;
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Email.setError("Enter a valid email");
+            Email.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(phone)) {
+            PhoneNumber.setError("Please enter your phone");
+            PhoneNumber.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(email)) {
+            Email.setError("Please enter your email");
+            Email.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(postcode)) {
+            PostCode.setError("Please enter your postcode");
+            PostCode.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(city)) {
+            City.setError("Please enter your city");
+            City.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(address)) {
+            Address.setError("Please enter your address");
+            Address.requestFocus();
+            return;
+        }
+
+        //if everything is fine
+
+        class UserLogin extends AsyncTask<Void, Void, String> {
+            ProgressBar progressBar;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                //progressBar.setVisibility(View.GONE);
+
+
+                try {
+                    //converting response to json object
+                    JSONObject obj = new JSONObject(s);
+
+                    //if no error in response
+                    if (!obj.getBoolean("error")) {
+                        User user = new User(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getId(),fname,sname,email,phone,postcode,city,address);
+                        //storing the user in shared preferences
+                        SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
+                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
+                        Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+                        navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
+
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+                //creating request parameters
+                int id=SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getId();
+                String ids=Integer.toString(id);
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id",ids);
+                params.put("fname", fname);
+                params.put("sname", sname);
+                params.put("phone", phone);
+                params.put("email", email);
+                params.put("postcode", postcode);
+                params.put("city", city);
+                params.put("address", address);
+
+
+                //returing the response
+                return requestHandler.sendPostRequest(URLs.URL_CHANGEDATA, params);
+            }
+        }
+
+        UserLogin ul = new UserLogin();
+        ul.execute();
+    }
+    private void loaddata() {
+        //first getting the values
+        final String fname = Fname.getText().toString();
+        final String sname = SName.getText().toString();
+        final String phone = PhoneNumber.getText().toString();
+        final String email = Email.getText().toString();
+        final String postcode = PostCode.getText().toString();
+        final String city = City.getText().toString();
+        final String address = Address.getText().toString();
+
+        Fname.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getFname());
+        SName.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getSname());
+        PhoneNumber.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getPhone());
+        Email.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getEmail());
+        PostCode.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getPostcode());
+        City.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getCity());
+        Address.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getAddress());
+
+
     }
 }

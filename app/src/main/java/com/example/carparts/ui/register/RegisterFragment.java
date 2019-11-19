@@ -42,16 +42,21 @@ import java.util.HashMap;
 
 public class RegisterFragment extends Fragment {
 
-    EditText editTextUsername, editTextEmail, editTextPassword;
+    EditText Fname,SName,PhoneNumber,Email,PostCode,City,Address,Password;
     View root;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_register, container, false);
         super.onCreate(savedInstanceState);
-        editTextUsername = (EditText) root.findViewById(R.id.editTextUsername);
-        editTextEmail = (EditText) root.findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) root.findViewById(R.id.editTextPassword);
+        Fname = (EditText) root.findViewById(R.id.FName);
+        SName = (EditText) root.findViewById(R.id.SName);
+        PhoneNumber = (EditText) root.findViewById(R.id.PhoneNumber);
+        Email = (EditText) root.findViewById(R.id.Email);
+        PostCode = (EditText) root.findViewById(R.id.PostCode);
+        City = (EditText) root.findViewById(R.id.City);
+        Address = (EditText) root.findViewById(R.id.Address);
+        Password = (EditText) root.findViewById(R.id.Password);
 
 
         root.findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
@@ -63,51 +68,69 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        root.findViewById(R.id.textViewLogin).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //if user pressed on login
-                //we will open the login screen
-                //getActivity().finish();
-                //startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
-                navigationView.getMenu().performIdentifierAction(R.id.nav_login, 0);
-            }
-        });
-
         return root;
 
     }
 
     private void registerUser() {
-        final String username = editTextUsername.getText().toString().trim();
-        final String email = editTextEmail.getText().toString().trim();
-        final String password = editTextPassword.getText().toString().trim();
+        final String fname = Fname.getText().toString().trim();
+        final String sname = SName.getText().toString().trim();
+        final String password = Password.getText().toString().trim();
+        final String phone = PhoneNumber.getText().toString().trim();
+        final String email = Email.getText().toString().trim();
+        final String postcode = PostCode.getText().toString().trim();
+        final String city = City.getText().toString().trim();
+        final String address = Address.getText().toString().trim();
 
 
         //first we will do the validations
 
-        if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter username");
-            editTextUsername.requestFocus();
+        if (TextUtils.isEmpty(fname)) {
+            Fname.setError("Please enter first name");
+            Fname.requestFocus();
             return;
         }
 
-        if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Please enter your email");
-            editTextEmail.requestFocus();
+        if (TextUtils.isEmpty(sname)) {
+            SName.setError("Please enter your second name");
+            SName.requestFocus();
             return;
         }
-
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Enter a valid email");
-            editTextEmail.requestFocus();
+            Email.setError("Enter a valid email");
+            Email.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(phone)) {
+            PhoneNumber.setError("Please enter your phone");
+            PhoneNumber.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(email)) {
+            Email.setError("Please enter your email");
+            Email.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(postcode)) {
+            PostCode.setError("Please enter your postcode");
+            PostCode.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(city)) {
+            City.setError("Please enter your city");
+            City.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(address)) {
+            Address.setError("Please enter your address");
+            Address.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Enter a password");
-            editTextPassword.requestFocus();
+            Password.setError("Enter a password");
+            Password.requestFocus();
             return;
         }
 
@@ -124,8 +147,13 @@ public class RegisterFragment extends Fragment {
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("username", username);
+                params.put("fname", fname);
+                params.put("sname", sname);
+                params.put("phone", phone);
                 params.put("email", email);
+                params.put("postcode", postcode);
+                params.put("city", city);
+                params.put("address", address);
                 params.put("password", password);
 
                 //returing the response
@@ -160,8 +188,13 @@ public class RegisterFragment extends Fragment {
                         //creating a new user object
                         User user = new User(
                                 userJson.getInt("id"),
-                                userJson.getString("username"),
-                                userJson.getString("email")
+                                userJson.getString("fname"),
+                                userJson.getString("sname"),
+                                userJson.getString("email"),
+                                userJson.getString("phone"),
+                                userJson.getString("postcode"),
+                                userJson.getString("city"),
+                                userJson.getString("address")
                         );
 
                         //storing the user in shared preferences
@@ -175,7 +208,7 @@ public class RegisterFragment extends Fragment {
                         nav_login.setTitle("My account");
                         View header = navigationView.getHeaderView(0);
                         TextView textView= (TextView) header.findViewById(R.id.textView);
-                        textView.setText("Hi "+username);
+                        textView.setText("Hi "+user.getFname()+" "+user.getSname());
                         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
 
