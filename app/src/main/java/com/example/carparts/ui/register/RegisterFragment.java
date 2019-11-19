@@ -172,7 +172,7 @@ public class RegisterFragment extends Fragment {
                         navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
                         Menu menu = navigationView.getMenu();
                         MenuItem nav_login = menu.findItem(R.id.nav_login);
-                        nav_login.setTitle("Logout");
+                        nav_login.setTitle("My account");
                         View header = navigationView.getHeaderView(0);
                         TextView textView= (TextView) header.findViewById(R.id.textView);
                         textView.setText("Hi "+username);

@@ -48,8 +48,15 @@ public class LoginFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         if(SharedPrefManager.isLoggedIn()){
-            root = inflater.inflate(R.layout.fragment_login, container, false);
-            SharedPrefManager.getInstance(getActivity().getApplicationContext()).logout();
+            root = inflater.inflate(R.layout.fragment_myaccount, container, false);
+
+
+
+
+            root.findViewById(R.id.buttonLogout).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SharedPrefManager.getInstance(getActivity().getApplicationContext()).logout();
             NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
             navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
             Menu menu = navigationView.getMenu();
@@ -58,12 +65,8 @@ public class LoginFragment extends Fragment {
             View header = navigationView.getHeaderView(0);
             TextView textView= (TextView) header.findViewById(R.id.textView);
             textView.setText("You are not logged in");
-            /*root.findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    userLogout();
                 }
-            });*/
+            });
         } else {
 
             root = inflater.inflate(R.layout.fragment_login, container, false);
@@ -159,7 +162,7 @@ public class LoginFragment extends Fragment {
                         navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
                         Menu menu = navigationView.getMenu();
                         MenuItem nav_login = menu.findItem(R.id.nav_login);
-                        nav_login.setTitle("Logout");
+                        nav_login.setTitle("My account");
                         View header = navigationView.getHeaderView(0);
                         TextView textView= (TextView) header.findViewById(R.id.textView);
                         textView.setText("Hi "+username);

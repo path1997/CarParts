@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             //textView.setText("Witaj "+SharedPrefManager.getUserName());
             textView.setText("Hi "+ SharedPrefManager.getUserName());
-            nav_login.setTitle("Logout");
+            nav_login.setTitle("My account");
 
         } else {
             textView.setText("You are not logged in");
