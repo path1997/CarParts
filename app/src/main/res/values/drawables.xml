@@ -7,4 +7,5 @@
     <item name="ic_menu_add_announcement" type="drawable">drawable/ic_menu_add_announcement</item>
     <item name="ic_menu_my_announcement" type="drawable">drawable/ic_menu_my_announcement</item>
     <item name="ic_menu_contact" type="drawable">drawable/ic_menu_contact</item>
+    <item name="ic_shopp" type="drawable">drawable/ic_shopp</item>
 </resources>

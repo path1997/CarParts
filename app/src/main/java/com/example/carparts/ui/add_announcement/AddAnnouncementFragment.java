@@ -52,7 +52,8 @@ import static com.example.carparts.SharedPrefManager.isLoggedIn;
 public class AddAnnouncementFragment extends Fragment {
     private static final int RESULT_LOAD_IMAGE = 1;
     //    private static final String SERVER_ADRESS = "masticable-stapler.000webhostapp.com";
-    private static final String SERVER_ADRESS = "http://masticable-stapler.000webhostapp.com";
+
+    private static final String SERVER_ADRESS = "https://masticable-stapler.000webhostapp.com/android/";
     protected int userID;
 
     private AddAnnouncementViewModel addAnnouncementViewModel;
@@ -90,9 +91,13 @@ public class AddAnnouncementFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Bitmap image = ((BitmapDrawable) imageViewUploadImage.getDrawable()).getBitmap();
+////                uploadImage = new UploadImage(image, namePhoto);
+//                new UploadImage(image, namePhoto).execute();
+////                uploadImage.execute();
                 uploadImage = new UploadImage(image, namePhoto);
                 uploadImage.execute();
                 addAnnouncement(uploadImage.getPhotoName());
+               // addAnnouncement();
             }
         });
         return root;
@@ -137,7 +142,7 @@ public class AddAnnouncementFragment extends Fragment {
             HttpParams httpRequestParams = getHttpRequestParams();
 
             HttpClient client = new DefaultHttpClient(httpRequestParams);
-            HttpPost post = new HttpPost(SERVER_ADRESS + "SavePicture.php");
+            HttpPost post = new HttpPost(SERVER_ADRESS +"SavePicture.php");
 
             try {
                 post.setEntity(new UrlEncodedFormEntity(dataToSend));
@@ -152,6 +157,7 @@ public class AddAnnouncementFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Toast.makeText(getActivity().getApplicationContext(), "Image Uploaded", Toast.LENGTH_SHORT).show();
+            System.out.println("wyslalem image upload");
         }
     }
 
@@ -164,10 +170,11 @@ public class AddAnnouncementFragment extends Fragment {
 
 
     private void addAnnouncement(String n) {
+
         final String title = editTextTitle.getText().toString().trim();
         final String description = editTextDescription.getText().toString().trim();
         final String price = editTextPrice.getText().toString().trim();
-        final String namePhoto = n;
+        final String name_photo = n;
         //int userID;
 
         if (TextUtils.isEmpty(title)) {
@@ -202,12 +209,17 @@ public class AddAnnouncementFragment extends Fragment {
             protected String doInBackground(Void... voids) {
                 RequestHandler requestHandler = new RequestHandler();
                 String user_id=Integer.toString(userID);
+                System.out.println("UserID"+ user_id);
+                System.out.println("Namephoto" + name_photo);
+                System.out.println("price " + price);
+                System.out.println("title " + title);
+                System.out.println("description " + description);
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("title", title);
                 params.put("description", description);
                 params.put("price", price);
-                params.put("name_photo", namePhoto);
+                params.put("name_photo", name_photo);
                 params.put("user_id", user_id);
 
                 //returing the response
@@ -223,8 +235,12 @@ public class AddAnnouncementFragment extends Fragment {
 
                 try {
                     //converting response to json object
+
+                    System.out.println("Jestem w addAnouncement przed JSONEM");
+                    System.out.println("response: " + s);
                     JSONObject obj = new JSONObject(s);
 
+                    System.out.println("Jestem w addAnouncement po JSONEM");
 //                    if no error in response
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
