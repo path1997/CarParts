@@ -55,7 +55,7 @@
         android:layout_above="@+id/btBuy"
         android:layout_below="@+id/cos"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,9 +68,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                android:text="TextView"
                 android:textAlignment="center"
-                android:textSize="24dp"
-                android:text="TextView" />
+                android:textSize="24dp" />
 
             <TextView
                 android:id="@+id/tvDesc"
@@ -78,9 +78,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                android:text="TextView"
                 android:textAlignment="center"
-                android:textSize="18dp"
-                android:text="TextView" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/tvPrice"
@@ -88,23 +88,40 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
+                android:text="TextView"
                 android:textAlignment="center"
-                android:textSize="22dp"
-                android:text="TextView" />
+                android:textSize="22dp" />
+
         </LinearLayout>
     </ScrollView>
 
     <Button
         android:id="@+id/btBuy"
-        android:layout_width="wrap_content"
+        android:layout_width="228dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="174dp"
+        android:layout_marginEnd="9dp"
         android:layout_marginBottom="0dp"
         android:text="Add to cart" />
+
+    <EditText
+        android:id="@+id/Ilosc"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="253dp"
+        android:layout_marginBottom="2dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="1"
+        android:textAlignment="viewEnd"
+        tools:text="1" />
 
 </RelativeLayout>
 

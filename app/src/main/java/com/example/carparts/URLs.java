@@ -15,4 +15,6 @@ public class URLs {
     public static final String URL_ADDANNOUNCEMENT= "http://masticable-stapler.000webhostapp.com/android/announcement.php?apicall=addannouncement";
     public static final String URL_CHANGEDATA ="http://masticable-stapler.000webhostapp.com/android/Api.php?apicall=changedata";
     public static final String URL_CHANGEPASSWORD ="http://masticable-stapler.000webhostapp.com/android/Api.php?apicall=changepassword";
+    public static final String URL_ADDPRODUCT ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=addproduct";
+    public static final String URL_GETCART ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=getcart";
 }

@@ -77,3 +77,4 @@ class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
         imageView.setImageBitmap(result);
     }
 }
+

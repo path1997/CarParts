@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -35,6 +37,12 @@ public class ProductList extends AppCompatActivity {
         //textView= findViewById(R.id.textView2);
         //textView.setText(category);
         getProducts();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cart_menu, menu);
+        return true;
     }
     private void getProducts() {
         class UserLogin extends AsyncTask<Void, Void, String> {

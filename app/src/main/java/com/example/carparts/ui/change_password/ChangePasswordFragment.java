@@ -99,6 +99,8 @@ public class ChangePasswordFragment extends Fragment {
                 super.onPreExecute();
                 progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
             }
 
             @Override
@@ -115,8 +117,6 @@ public class ChangePasswordFragment extends Fragment {
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
                         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
                         navigationView.getMenu().performIdentifierAction(R.id.nav_login, 0);
 

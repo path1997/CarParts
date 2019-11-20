@@ -72,7 +72,7 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     FragmentTransaction fr = getFragmentManager().beginTransaction();
-                    fr.replace(R.id.nav_host_fragment, new ChangePasswordFragment());
+                    fr.replace(R.id.nav_host_fragment, new ChangePasswordFragment()).addToBackStack(null);
                     fr.commit();
                 }
             });
@@ -115,7 +115,7 @@ public class LoginFragment extends Fragment {
                 public void onClick(View view) {
                     //open register screen
                     FragmentTransaction fr = getFragmentManager().beginTransaction();
-                    fr.replace(R.id.nav_host_fragment, new RegisterFragment());
+                    fr.replace(R.id.nav_host_fragment, new RegisterFragment()).addToBackStack(null);
                     fr.commit();
                 }
             });
@@ -151,6 +151,8 @@ public class LoginFragment extends Fragment {
                 super.onPreExecute();
                 progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
             }
 
             @Override
@@ -195,8 +197,6 @@ public class LoginFragment extends Fragment {
                         View header = navigationView.getHeaderView(0);
                         TextView textView= (TextView) header.findViewById(R.id.textView);
                         textView.setText("Hi "+user.getFname()+" "+user.getSname());
-                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
 
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();

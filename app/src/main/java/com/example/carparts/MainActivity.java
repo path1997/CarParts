@@ -1,5 +1,6 @@
 package com.example.carparts;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.carparts.ui.add_announcement.AddAnnouncementFragment;
@@ -47,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        /*findViewById(R.id.bt_cart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Cart.class));
+            }
+        });*/
 
 
         /*FloatingActionButton fab = findViewById(R.id.fab);
@@ -152,13 +159,28 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.bt_cart) {
+            Intent intent1 = new Intent(this,Cart.class);
+            this.startActivity(intent1);
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -167,5 +189,6 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 
 }
