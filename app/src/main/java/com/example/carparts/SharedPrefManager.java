@@ -1,10 +1,7 @@
 package com.example.carparts;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-
-import com.example.carparts.ui.login.LoginFragment;
 
 /**
  * Created by Belal on 9/5/2017.
@@ -13,12 +10,15 @@ import com.example.carparts.ui.login.LoginFragment;
 //here for this class we are using a singleton pattern
 
 public class SharedPrefManager {
-
     //the constants
-    private static final String SHARED_PREF_NAME = "simplifiedcodingsharedpref";
-    private static final String KEY_USERNAME = "keyusername";
+    private static final String SHARED_PREF_NAME = "sharedpref"; // może krzaczyć
+    private static final String KEY_FNAME = "keyfname";
+    private static final String KEY_SNAME = "keysname";
+    private static final String KEY_PHONE = "keyphone";
     private static final String KEY_EMAIL = "keyemail";
-    private static final String KEY_GENDER = "keygender";
+    private static final String KEY_POSTCODE = "keypostcode";
+    private static final String KEY_CITY = "keycity";
+    private static final String KEY_ADDRESS = "keyaddress";
     private static final String KEY_ID = "keyid";
 
     private static SharedPrefManager mInstance;
@@ -41,15 +41,20 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(KEY_ID, user.getId());
-        editor.putString(KEY_USERNAME, user.getUsername());
+        editor.putString(KEY_FNAME, user.getFname());
+        editor.putString(KEY_SNAME, user.getSname());
+        editor.putString(KEY_PHONE, user.getPhone());
         editor.putString(KEY_EMAIL, user.getEmail());
+        editor.putString(KEY_POSTCODE, user.getPostcode());
+        editor.putString(KEY_CITY, user.getCity());
+        editor.putString(KEY_ADDRESS, user.getAddress());
         editor.apply();
     }
 
     //this method will checker whether user is already logged in or not
     public static boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_USERNAME, null) != null;
+        return sharedPreferences.getString(KEY_FNAME, null) != null;
     }
 
     //this method will give the logged in user
@@ -57,14 +62,25 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
                 sharedPreferences.getInt(KEY_ID, -1),
-                sharedPreferences.getString(KEY_USERNAME, null),
-                sharedPreferences.getString(KEY_EMAIL, null)
+                sharedPreferences.getString(KEY_FNAME, null),
+                sharedPreferences.getString(KEY_SNAME, null),
+                sharedPreferences.getString(KEY_EMAIL, null),
+                sharedPreferences.getString(KEY_PHONE, null),
+                sharedPreferences.getString(KEY_POSTCODE, null),
+                sharedPreferences.getString(KEY_CITY, null),
+                sharedPreferences.getString(KEY_ADDRESS, null)
+
         );
     }
 
+
     public static String getUserName() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_USERNAME, null);
+        return sharedPreferences.getString(KEY_FNAME, null);
+    }
+    public static String getUserId() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_ID, null);
     }
 
     //this method will logout the user
