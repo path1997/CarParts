@@ -23,13 +23,13 @@ public class MyAnnouncementFragment extends Fragment {
         myAnnouncementViewModel =
                 ViewModelProviders.of(this).get(MyAnnouncementViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_announcement, container, false);
-        final TextView textView = root.findViewById(R.id.text_add_announcement);
-        myAnnouncementViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = root.findViewById(R.id.text_add_announcement);
+//        myAnnouncementViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
         return root;
     }
 }

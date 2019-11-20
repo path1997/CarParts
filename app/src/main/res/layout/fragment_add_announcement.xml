@@ -1,19 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_add_announcement"
+        android:id="@+id/textView4"
+        android:layout_width="213dp"
+        android:layout_height="31dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="99dp"
+        android:text="Add announcement"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/linear_add_ann"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="99dp"
+        android:layout_marginBottom="130dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_title_add_ann"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Title" />
+
+        <EditText
+            android:id="@+id/et_price_add_ann"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Price" />
+
+        <EditText
+            android:id="@+id/et_description_add_ann"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:layout_margin="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Description"
+            android:textAlignment="viewStart" />
+
+        <Button
+            android:id="@+id/btn_add_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:layout_marginRight="110dp"
+            android:background="@drawable/round_button_add_image"
+            android:text="UPLOAD IMAGE" />
+
+        <ImageView
+            android:id="@+id/im_add"
+            android:layout_width="88dp"
+            android:layout_height="73dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btn_add_ann"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/round_button_add_ann"
+            android:text="ADD"
+            android:textSize="25sp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
