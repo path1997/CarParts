@@ -16,51 +16,22 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Cart extends AppCompatActivity {
-    int[] idz;
-    int suma=0;
-    /*static int suma=0;
-    static void plusSuma(int cena){
-        suma=suma+cena;
-    }
-    static void minusSuma(int cena){
-        suma=suma-cena;
-    }
-    static void zeroSuma(){
-        suma=0;
-    }
-    static void setSuma(int cena){
-        suma=cena;
-    }*/
+public class MyOrderDetail extends AppCompatActivity {
+    String id_order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
-        getProducts();
-        findViewById(R.id.btdelivery).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Delivery.class);
-                String suma1= Integer.toString(suma);
-                intent.putExtra("suma", suma1);
-                startActivity(intent);
-                finish();
+        setContentView(R.layout.activity_my_order_detail);
+        Bundle extras = getIntent().getExtras();
+        id_order=extras.getString("idOrder");
+        getMyOrDerdetail();
 
-            }
-        });
     }
-    @Override
-    public void onRestart() {
-        super.onRestart();
-        this.recreate();
-        suma=0;
-    }
-    private void getProducts() {
+    void getMyOrDerdetail(){
         class UserLogin extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
@@ -87,9 +58,9 @@ public class Cart extends AppCompatActivity {
                         //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
                         //getting the user from the response
-                        JSONArray jsonArray = obj.getJSONArray("cart");
+                        JSONArray jsonArray = obj.getJSONArray("orderdetail");
 
-                        idz = new int[jsonArray.length()];
+                        int[] idz = new int[jsonArray.length()];
                         String[] cid = new String[jsonArray.length()];
                         String[] name = new String[jsonArray.length()];
                         String[] path = new String[jsonArray.length()];
@@ -97,6 +68,7 @@ public class Cart extends AppCompatActivity {
                         int[] quantity = new int[jsonArray.length()];
                         //suma=new int[jsonArray.length()];
                         System.out.println("elo");
+                        String totalcost="",date="",payment="";
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject category = jsonArray.getJSONObject(i);
                             System.out.println(category.getString("price"));
@@ -106,28 +78,26 @@ public class Cart extends AppCompatActivity {
                             path[i]= category.getString("path");
                             price[i]= category.getInt("price");
                             quantity[i]= category.getInt("quantity");
-                            suma+=price[i]*quantity[i];
+                            totalcost=category.getString("totalcost");
+                            date=category.getString("date_of_order");
+                            payment=category.getString("payment");
                         }
 
-
                         CartProductListCustomAdapter customadapter;
-                        final ListView listView=(ListView) findViewById(R.id.listviewcart);
-                        customadapter = new CartProductListCustomAdapter(Cart.this,cid,idz,name,path,price,quantity,0 );
+                        final ListView listView=(ListView) findViewById(R.id.listvieworderdetail);
+                        customadapter = new CartProductListCustomAdapter(MyOrderDetail.this,cid,idz,name,path,price,quantity,1 );
                         listView.setAdapter(customadapter);
-                        TextView wartosczamowienia=(TextView) findViewById(R.id.Wartosc);
-                        wartosczamowienia.setText("Total order value : "+suma+"zł");
-                        wartosczamowienia.setGravity(Gravity.CENTER);
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent intent = new Intent(getApplicationContext(), ProductDetail.class);
-                                String idP=Long.toString(idz[position]);
-                                intent.putExtra("id_product", idP);
-                                startActivity(intent);
-                            }
-                        });
 
-
+                        TextView txdate=(TextView) findViewById(R.id.orderdate);
+                        txdate.setText("Date of order: "+date.substring(0, 16));
+                        TextView totalcosttx=(TextView) findViewById(R.id.ordercost);
+                        totalcosttx.setText("Total cost: "+totalcost+"zł");
+                        TextView paymentTx=(TextView) findViewById(R.id.orderpayment);
+                        if (payment.equals("1")) {
+                            paymentTx.setText("Method of Payment: Paid by Paypal");
+                        } else {
+                            paymentTx.setText("Method of Payment: Paid on delivery");
+                        }
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
@@ -145,10 +115,10 @@ public class Cart extends AppCompatActivity {
                 String ids=Integer.toString(id);
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("user_id", ids);
+                params.put("order_id", id_order);
 
                 //returing the response
-                return requestHandler.sendPostRequest(URLs.URL_GETCART, params);
+                return requestHandler.sendPostRequest(URLs.URL_GETMYORDERDETAIL, params);
             }
         }
 

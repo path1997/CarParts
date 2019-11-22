@@ -64,7 +64,8 @@
             android:layout_toEndOf="@+id/btMinus"
             android:text="+"
             android:textAlignment="center"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:visible="true"/>
 
         <TextView
             android:id="@+id/btRemove"

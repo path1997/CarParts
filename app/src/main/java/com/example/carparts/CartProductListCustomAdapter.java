@@ -35,7 +35,8 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
     private int[] quantity;
     private int[] id;
     private String[] cid;
-    public CartProductListCustomAdapter(Activity context,String[] cid, int[] id, String[] name, String[] path, int[] price,int[] quantity) {
+    int type;
+    public CartProductListCustomAdapter(Activity context,String[] cid, int[] id, String[] name, String[] path, int[] price,int[] quantity, int type) {
         super(context, R.layout.cart_listview_layout, name);
         this.context = context;
         // this.urls = urls;
@@ -45,6 +46,7 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
         this.quantity=quantity;
         this.id=id;
         this.cid=cid;
+        this.type=type;
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -56,6 +58,15 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
         //  textView.setText(urls[position] );
         nameTx.setText(name[position] );
         final String ids=Integer.toString(id[position]);
+        if(type==1){
+            TextView plus=(TextView) listViewItem.findViewById(R.id.btPlus);
+            TextView minus=(TextView) listViewItem.findViewById(R.id.btMinus);
+            TextView remove=(TextView) listViewItem.findViewById(R.id.btRemove);
+            plus.setVisibility(View.GONE);
+            minus.setVisibility(View.GONE);
+            remove.setVisibility(View.GONE);
+
+        }
 
        /* listViewItem.findViewById(R.id.btDelete).setOnClickListener(new View.OnClickListener() {
             @Override
