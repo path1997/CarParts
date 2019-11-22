@@ -119,6 +119,7 @@ public class AddAnnouncementFragment extends Fragment {
         int number;
 
         public UploadImage(Bitmap image, String name) {
+            //TODO: do usuniecia i ostatni z bazy
             number = ++NUM_PHOTO;
             this.image = image;
             this.name = name + number;
@@ -126,7 +127,7 @@ public class AddAnnouncementFragment extends Fragment {
         }
 
         public String getPhotoName() {
-            return name + number;
+            return name;
         }
 
         @Override
@@ -219,7 +220,7 @@ public class AddAnnouncementFragment extends Fragment {
                 params.put("title", title);
                 params.put("description", description);
                 params.put("price", price);
-                params.put("name_photo", name_photo);
+                params.put("name_photo", name_photo+".jpg");
                 params.put("user_id", user_id);
 
                 //returing the response

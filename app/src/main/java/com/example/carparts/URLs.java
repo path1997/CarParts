@@ -23,4 +23,5 @@ public class URLs {
     public static final String URL_CONFIRMORDER ="http://masticable-stapler.000webhostapp.com/android/order.php?apicall=confirmorder";
     public static final String URL_GETMYORDER ="http://masticable-stapler.000webhostapp.com/android/order.php?apicall=getmyorder";
     public static final String URL_GETMYORDERDETAIL ="http://masticable-stapler.000webhostapp.com/android/order.php?apicall=getmyorderdetail";
+    public static final String URL_ALLANNOUNCEMENT ="http://masticable-stapler.000webhostapp.com/android/announcement.php?apicall=allannouncement";
 }
