@@ -20,4 +20,5 @@ public class URLs {
     public static final String URL_MINUSITEM ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=minusitem";
     public static final String URL_PLUSITEM ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=plusitem";
     public static final String URL_REMOVEITEM ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=removeitem";
+    public static final String URL_ALLANNOUNCEMENT ="http://masticable-stapler.000webhostapp.com/android/announcement.php?apicall=allannouncement";
 }
