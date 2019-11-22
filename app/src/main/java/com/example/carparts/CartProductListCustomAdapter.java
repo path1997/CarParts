@@ -2,13 +2,30 @@ package com.example.carparts;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.carparts.ui.register.RegisterFragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class CartProductListCustomAdapter extends ArrayAdapter<String> {
     private Activity context;
@@ -17,7 +34,8 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
     private int[] price;
     private int[] quantity;
     private int[] id;
-    public CartProductListCustomAdapter(Activity context,int[] id, String[] name, String[] path, int[] price,int[] quantity) {
+    private String[] cid;
+    public CartProductListCustomAdapter(Activity context,String[] cid, int[] id, String[] name, String[] path, int[] price,int[] quantity) {
         super(context, R.layout.cart_listview_layout, name);
         this.context = context;
         // this.urls = urls;
@@ -26,18 +44,19 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
         this.price=price;
         this.quantity=quantity;
         this.id=id;
+        this.cid=cid;
     }
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.listview_layout, null, true);
+        View listViewItem = inflater.inflate(R.layout.cart_listview_layout, null, true);
         TextView nameTx = (TextView) listViewItem.findViewById(R.id.txname);
         TextView  priceTx = (TextView) listViewItem.findViewById(R.id.txprice);
         // TextView textView = (TextView) listViewItem.findViewById(R.id.tvurl);
         //  textView.setText(urls[position] );
         nameTx.setText(name[position] );
         final String ids=Integer.toString(id[position]);
-        Button usun= (Button) listViewItem.findViewById(R.id.btDelete) ;
+
        /* listViewItem.findViewById(R.id.btDelete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,9 +65,181 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
                 context.startActivity(intent);
             }
         });*/
+       listViewItem.findViewById(R.id.btMinus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                minusItem(cid[position]);
+            }
+        });
+        listViewItem.findViewById(R.id.btPlus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                plusItem(cid[position]);
+            }
+        });
+        listViewItem.findViewById(R.id.btRemove).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                removeItem(cid[position]);
+
+            }
+        });
         priceTx.setText(quantity[position]+"x"+price[position]+"zł="+quantity[position]*price[position]+"zł");
         ImageView image = (ImageView) listViewItem.findViewById(R.id.imimage);
         new DownLoadImageTask(image).execute(URLs.URL_PPHOTO+path[position]);
         return  listViewItem;
+    }
+    private void minusItem(final String ids) {
+        class UserLogin extends AsyncTask<Void, Void, String> {
+            String idp=ids;
+            ProgressBar progressBar;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressBar = (ProgressBar) context.findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+            private ArrayList<String> arrayList;
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                progressBar.setVisibility(View.GONE);
+
+
+                try {
+                    //converting response to json object
+                    //System.out.println("przed");
+                    JSONObject obj = new JSONObject(s);
+                    //System.out.println("za");
+                    //if no error in response
+                    if (!obj.getBoolean("error")) {
+                        Toast.makeText(context.getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        context.recreate();
+                    } else {
+                        Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id", idp);
+
+                //returing the response
+                return requestHandler.sendPostRequest(URLs.URL_MINUSITEM, params);
+            }
+        }
+
+        UserLogin ul = new UserLogin();
+        ul.execute();
+    }
+    private void plusItem(final String ids) {
+        class UserLogin extends AsyncTask<Void, Void, String> {
+            String idp=ids;
+            ProgressBar progressBar;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressBar = (ProgressBar) context.findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+            private ArrayList<String> arrayList;
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                progressBar.setVisibility(View.GONE);
+
+
+                try {
+                    //converting response to json object
+                    //System.out.println("przed");
+                    JSONObject obj = new JSONObject(s);
+                    //System.out.println("za");
+                    //if no error in response
+                    if (!obj.getBoolean("error")) {
+                        Toast.makeText(context.getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        context.recreate();
+                    } else {
+                        Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id", idp);
+
+                //returing the response
+                return requestHandler.sendPostRequest(URLs.URL_PLUSITEM, params);
+            }
+        }
+
+        UserLogin ul = new UserLogin();
+        ul.execute();
+    }
+    private void removeItem(final String ids) {
+        class UserLogin extends AsyncTask<Void, Void, String> {
+            String idp=ids;
+            ProgressBar progressBar;
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressBar = (ProgressBar) context.findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+            private ArrayList<String> arrayList;
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                progressBar.setVisibility(View.GONE);
+
+
+                try {
+                    //converting response to json object
+                    //System.out.println("przed");
+                    JSONObject obj = new JSONObject(s);
+                    //System.out.println("za");
+                    //if no error in response
+                    if (!obj.getBoolean("error")) {
+                        Toast.makeText(context.getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        context.recreate();
+                    } else {
+                        Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id", idp);
+
+                //returing the response
+                return requestHandler.sendPostRequest(URLs.URL_REMOVEITEM, params);
+            }
+        }
+
+        UserLogin ul = new UserLogin();
+        ul.execute();
     }
 }

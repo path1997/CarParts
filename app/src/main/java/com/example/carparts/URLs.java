@@ -17,4 +17,7 @@ public class URLs {
     public static final String URL_CHANGEPASSWORD ="http://masticable-stapler.000webhostapp.com/android/Api.php?apicall=changepassword";
     public static final String URL_ADDPRODUCT ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=addproduct";
     public static final String URL_GETCART ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=getcart";
+    public static final String URL_MINUSITEM ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=minusitem";
+    public static final String URL_PLUSITEM ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=plusitem";
+    public static final String URL_REMOVEITEM ="http://masticable-stapler.000webhostapp.com/android/cart.php?apicall=removeitem";
 }

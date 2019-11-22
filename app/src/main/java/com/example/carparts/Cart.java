@@ -5,21 +5,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cart extends AppCompatActivity {
     int[] idz;
+    int suma=0;
+    /*static int suma=0;
+    static void plusSuma(int cena){
+        suma=suma+cena;
+    }
+    static void minusSuma(int cena){
+        suma=suma-cena;
+    }
+    static void zeroSuma(){
+        suma=0;
+    }
+    static void setSuma(int cena){
+        suma=cena;
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +47,7 @@ public class Cart extends AppCompatActivity {
     public void onRestart() {
         super.onRestart();
         this.recreate();
+        suma=0;
     }
     private void getProducts() {
         class UserLogin extends AsyncTask<Void, Void, String> {
@@ -61,28 +79,33 @@ public class Cart extends AppCompatActivity {
                         JSONArray jsonArray = obj.getJSONArray("cart");
 
                         idz = new int[jsonArray.length()];
+                        String[] cid = new String[jsonArray.length()];
                         String[] name = new String[jsonArray.length()];
                         String[] path = new String[jsonArray.length()];
                         int[] price = new int[jsonArray.length()];
                         int[] quantity = new int[jsonArray.length()];
+                        //suma=new int[jsonArray.length()];
                         System.out.println("elo");
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject category = jsonArray.getJSONObject(i);
                             System.out.println(category.getString("price"));
                             idz[i]= category.getInt("id");
+                            cid[i]= category.getString("cid");
                             name[i]= category.getString("name");
                             path[i]= category.getString("path");
                             price[i]= category.getInt("price");
                             quantity[i]= category.getInt("quantity");
+                            suma+=price[i]*quantity[i];
                         }
-
 
 
                         CartProductListCustomAdapter customadapter;
                         final ListView listView=(ListView) findViewById(R.id.listviewcart);
-                        customadapter = new CartProductListCustomAdapter(Cart.this,idz,name,path,price,quantity );
+                        customadapter = new CartProductListCustomAdapter(Cart.this,cid,idz,name,path,price,quantity );
                         listView.setAdapter(customadapter);
-
+                        TextView wartosczamowienia=(TextView) findViewById(R.id.Wartosc);
+                        wartosczamowienia.setText("Total order value : "+suma+"zł");
+                        wartosczamowienia.setGravity(Gravity.CENTER);
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -92,6 +115,7 @@ public class Cart extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
+
 
 
                     } else {

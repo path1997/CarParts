@@ -4,7 +4,7 @@
 
 <item
 android:id="@+id/bt_cart"
-android:icon="@drawable/common_google_signin_btn_icon_dark"
+android:icon="@drawable/ic_shopp"
 android:orderInCategory="100"
     app:showAsAction="always"
     android:title="TODO" />

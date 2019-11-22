@@ -121,7 +121,7 @@ public class ProductDetail extends AppCompatActivity {
                         SliderView sliderView = findViewById(R.id.imageSlider);
 
                         final SliderAdapterExample adapter = new SliderAdapterExample(getApplicationContext());
-                        adapter.setCount(3);
+                        adapter.setCount(jsonArray.length());
                         adapter.setPath(path);
 
                         sliderView.setSliderAdapter(adapter);
@@ -216,9 +216,12 @@ public class ProductDetail extends AppCompatActivity {
                String ilosc1=ilosc.getText().toString();
                 int id=SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
                 String ids=Integer.toString(id);
+                System.out.println(ids);
+                System.out.println(ilosc1);
+                System.out.println(id_product);
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("ilosc",ilosc1);
+                params.put("quantity",ilosc1);
                 params.put("id_product", id_product);
                 params.put("id_user",ids);
 

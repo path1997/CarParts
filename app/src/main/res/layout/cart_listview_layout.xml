@@ -23,35 +23,62 @@
             android:layout_width="163dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="13dp"
-            android:layout_marginEnd="104dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
-            android:textSize="20dp" />
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/txprice"
             android:layout_width="164dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txname"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="103dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="13dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
-            android:textSize="20dp" />
+            android:textSize="17dp" />
 
-        <Button
-            android:id="@+id/btDelete"
-            android:layout_width="77dp"
+        <TextView
+            android:id="@+id/btMinus"
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="45dp"
+            android:layout_toEndOf="@+id/txprice"
+            android:text="-"
+            android:textAlignment="center"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/btPlus"
+            android:layout_width="19dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="5dp"
-            android:text="Delete" />
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/btMinus"
+            android:text="+"
+            android:textAlignment="center"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/btRemove"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@+id/txname"
+            android:text="Remove item"
+            android:textAlignment="center"
+            android:textSize="14dp" />
+
     </RelativeLayout>
 </LinearLayout>
