@@ -1,4 +1,4 @@
-package com.example.carparts;
+package com.example.carparts.ui.my_orders;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.carparts.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,20 +41,10 @@ public class OrderListProductListCustomAdapter extends ArrayAdapter<String> {
         TextView nameTx = (TextView) listViewItem.findViewById(R.id.ordername);
         TextView  totalcostTx = (TextView) listViewItem.findViewById(R.id.ordercost);
          TextView dateTx = (TextView) listViewItem.findViewById(R.id.orderdate);
-        //  textView.setText(urls[position] );
+
         nameTx.setText("Order "+id[position] );
         totalcostTx.setText("Total cost order: "+totalcost[position]+"zł");
         dateTx.setText("Date of order: "+date[position].substring(0, 16));
-
-       /* listViewItem.findViewById(R.id.btDelete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ProductDetail.class);
-                intent.putExtra("id_product", ids);
-                context.startActivity(intent);
-            }
-        });*/
-
         return  listViewItem;
     }
 }

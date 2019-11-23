@@ -1,4 +1,4 @@
-package com.example.carparts;
+package com.example.carparts.ui.delivery;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carparts.MainActivity;
+import com.example.carparts.R;
+import com.example.carparts.RequestHandler;
+import com.example.carparts.SharedPrefManager;
+import com.example.carparts.URLs;
 import com.example.carparts.config.Config;
 import com.google.android.material.navigation.NavigationView;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
@@ -71,14 +76,13 @@ public class Delivery extends AppCompatActivity {
                 View radioButton = radioGroup1.findViewById(checkedId);
                 int index = radioGroup1.indexOfChild(radioButton);
 
-                // Add logic here
 
                 switch (index) {
-                    case 0: // first button
+                    case 0:
                         suma-=6;
                         totalcost.setText("Total cost: "+suma+"zł");
                         break;
-                    case 1: // secondbutton
+                    case 1:
                         suma+=6;
                         totalcost.setText("Total cost: "+suma+"zł");
                         break;
@@ -93,14 +97,13 @@ public class Delivery extends AppCompatActivity {
                 View radioButton = radioGroup2.findViewById(checkedId);
                 int index = radioGroup2.indexOfChild(radioButton);
 
-                // Add logic here
 
                 switch (index) {
-                    case 0: // first button
+                    case 0:
                         suma-=10;
                         totalcost.setText("Total cost: "+suma+"zł");
                         break;
-                    case 1: // secondbutton
+                    case 1:
                         suma+=10;
                         totalcost.setText("Total cost: "+suma+"zł");
                         break;
@@ -134,13 +137,7 @@ public class Delivery extends AppCompatActivity {
             if(resultCode==RESULT_OK){
                 PaymentConfirmation confirmation=data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if(confirmation!=null){
-                   // try{
-                        //String paymentDetails= confirmation.toJSONObject().toString(4);
-                        //startActivity(new Intent(this,OrderConfirmation.class));
-                        addOrder(1);
-                    /*} catch (JSONException e) {
-                        e.printStackTrace();
-                    }*/
+                    addOrder(1);
                 }
             } else if(resultCode== Activity.RESULT_CANCELED) {
                 Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show();
@@ -151,7 +148,7 @@ public class Delivery extends AppCompatActivity {
         }
     }
     void addOrder(final int payment){
-        class UserLogin extends AsyncTask<Void, Void, String> {
+        class Deliveryc extends AsyncTask<Void, Void, String> {
             ProgressBar progressBar;
 
             @Override
@@ -170,18 +167,15 @@ public class Delivery extends AppCompatActivity {
 
 
                 try {
-                    //converting response to json object
-                    //System.out.println("przed");
+
                     JSONObject obj = new JSONObject(s);
-                    //System.out.println("za");
-                    //if no error in response
+
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         finish();
-                        //NavigationView navigationView = findViewById(R.id.nav_view);
-                        //navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
+;
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
@@ -193,24 +187,22 @@ public class Delivery extends AppCompatActivity {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
+
                 RequestHandler requestHandler = new RequestHandler();
                 int id = SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
                 String ids = Integer.toString(id);
                 String suma1 = Integer.toString(suma);
                 String payment1 = Integer.toString(payment);
-                //creating request parameters
+
                 HashMap<String, String> params = new HashMap<>();
                 params.put("user_id", ids);
                 params.put("payment",payment1);
                 params.put("sum", suma1);
 
-
-                //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_CONFIRMORDER, params);
             }
         }
-        UserLogin ul = new UserLogin();
+        Deliveryc ul = new Deliveryc();
         ul.execute();
     }
 }

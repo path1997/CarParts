@@ -26,7 +26,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="13dp"
             android:layout_toEndOf="@+id/imimage"
-            android:text="TextView"
             android:textSize="17dp" />
 
         <TextView
@@ -37,7 +36,6 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="13dp"
             android:layout_toEndOf="@+id/imimage"
-            android:text="TextView"
             android:textSize="17dp" />
 
         <TextView

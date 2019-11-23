@@ -1,32 +1,25 @@
 package com.example.carparts.ui.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.carparts.ProductDetail;
-import com.example.carparts.ProductList;
-import com.example.carparts.ProductListCustomAdapter;
+import com.example.carparts.ui.product.ProductDetail;
+import com.example.carparts.ui.product.ProductListCustomAdapter;
 import com.example.carparts.R;
 import com.example.carparts.RequestHandler;
-import com.example.carparts.SharedPrefManager;
 import com.example.carparts.URLs;
 
 import org.json.JSONArray;
@@ -34,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 

@@ -14,16 +14,10 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by Belal on 9/5/2017.
- */
 
 public class RequestHandler {
 
 
-    //this method will send a post request to the specified url
-    //in this app we are using only post request
-    //in the hashmap we have the data to be sent to the server in keyvalue pairs
     public String sendPostRequest(String requestURL, HashMap<String, String> postDataParams) {
         URL url;
 
@@ -66,7 +60,6 @@ public class RequestHandler {
     }
 
 
-    //this method is converting keyvalue pairs data into a query string as needed to send to the server
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;

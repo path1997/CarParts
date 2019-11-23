@@ -1,17 +1,20 @@
-package com.example.carparts;
+package com.example.carparts.ui.my_orders;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.carparts.R;
+import com.example.carparts.RequestHandler;
+import com.example.carparts.SharedPrefManager;
+import com.example.carparts.URLs;
+import com.example.carparts.ui.cart.CartProductListCustomAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +35,7 @@ public class MyOrderDetail extends AppCompatActivity {
 
     }
     void getMyOrDerdetail(){
-        class UserLogin extends AsyncTask<Void, Void, String> {
+        class Myorder extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
             @Override
@@ -49,15 +52,10 @@ public class MyOrderDetail extends AppCompatActivity {
 
 
                 try {
-                    //converting response to json object
-                    //System.out.println("przed");
                     JSONObject obj = new JSONObject(s);
-                    //System.out.println("za");
-                    //if no error in response
-                    if (!obj.getBoolean("error")) {
-                        //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                        //getting the user from the response
+                    if (!obj.getBoolean("error")) {
+
                         JSONArray jsonArray = obj.getJSONArray("orderdetail");
 
                         int[] idz = new int[jsonArray.length()];
@@ -66,21 +64,21 @@ public class MyOrderDetail extends AppCompatActivity {
                         String[] path = new String[jsonArray.length()];
                         int[] price = new int[jsonArray.length()];
                         int[] quantity = new int[jsonArray.length()];
-                        //suma=new int[jsonArray.length()];
+
                         System.out.println("elo");
                         String totalcost="",date="",payment="";
                         for(int i=0;i<jsonArray.length();i++) {
-                            JSONObject category = jsonArray.getJSONObject(i);
-                            System.out.println(category.getString("price"));
-                            idz[i]= category.getInt("id");
-                            cid[i]= category.getString("cid");
-                            name[i]= category.getString("name");
-                            path[i]= category.getString("path");
-                            price[i]= category.getInt("price");
-                            quantity[i]= category.getInt("quantity");
-                            totalcost=category.getString("totalcost");
-                            date=category.getString("date_of_order");
-                            payment=category.getString("payment");
+                            JSONObject myorder = jsonArray.getJSONObject(i);
+                            System.out.println(myorder.getString("price"));
+                            idz[i]= myorder.getInt("id");
+                            cid[i]= myorder.getString("cid");
+                            name[i]= myorder.getString("name");
+                            path[i]= myorder.getString("path");
+                            price[i]= myorder.getInt("price");
+                            quantity[i]= myorder.getInt("quantity");
+                            totalcost=myorder.getString("totalcost");
+                            date=myorder.getString("date_of_order");
+                            payment=myorder.getString("payment");
                         }
 
                         CartProductListCustomAdapter customadapter;
@@ -90,6 +88,8 @@ public class MyOrderDetail extends AppCompatActivity {
 
                         TextView txdate=(TextView) findViewById(R.id.orderdate);
                         txdate.setText("Date of order: "+date.substring(0, 16));
+                        TextView txname=(TextView) findViewById(R.id.ordername);
+                        txname.setText("Order "+idz[0]);
                         TextView totalcosttx=(TextView) findViewById(R.id.ordercost);
                         totalcosttx.setText("Total cost: "+totalcost+"zł");
                         TextView paymentTx=(TextView) findViewById(R.id.orderpayment);
@@ -109,20 +109,18 @@ public class MyOrderDetail extends AppCompatActivity {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
-                int id=SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+                int id= SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
                 String ids=Integer.toString(id);
-                //creating request parameters
+
                 HashMap<String, String> params = new HashMap<>();
                 params.put("order_id", id_order);
 
-                //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_GETMYORDERDETAIL, params);
             }
         }
 
-        UserLogin ul = new UserLogin();
+        Myorder ul = new Myorder();
         ul.execute();
     }
 }

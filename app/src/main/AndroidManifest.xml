@@ -20,9 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MyOrderDetail"></activity>
-        <activity android:name=".Delivery" />
-        <activity android:name=".Cart" />
+        <activity android:name=".ui.my_orders.MyOrderDetail"></activity>
+        <activity android:name=".ui.delivery.Delivery" />
+        <activity android:name=".ui.cart.Cart" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,8 +38,8 @@
         <activity
             android:name=".Geolocation"
             android:label="@string/title_activity_geolocation" />
-        <activity android:name=".ProductDetail" />
-        <activity android:name=".ProductList" />
+        <activity android:name=".ui.product.ProductDetail" />
+        <activity android:name=".ui.product.ProductList" />
         <activity android:name=".product_list" />
         <activity
             android:name=".MainActivity"

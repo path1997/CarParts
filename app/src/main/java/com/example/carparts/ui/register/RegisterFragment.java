@@ -63,8 +63,6 @@ public class RegisterFragment extends Fragment {
         root.findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if user pressed on button register
-                //here we will register the user to server
                 registerUser();
             }
         });
@@ -83,8 +81,6 @@ public class RegisterFragment extends Fragment {
         final String city = City.getText().toString().trim();
         final String address = Address.getText().toString().trim();
 
-
-        //first we will do the validations
 
         if (TextUtils.isEmpty(fname)) {
             Fname.setError("Please enter first name");
@@ -135,7 +131,6 @@ public class RegisterFragment extends Fragment {
             return;
         }
 
-        //if it passes all the validations
 
         class RegisterUser extends AsyncTask<Void, Void, String> {
 
@@ -143,10 +138,8 @@ public class RegisterFragment extends Fragment {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
 
-                //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("fname", fname);
                 params.put("sname", sname);
@@ -157,14 +150,12 @@ public class RegisterFragment extends Fragment {
                 params.put("address", address);
                 params.put("password", password);
 
-                //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_REGISTER, params);
             }
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                //displaying the progress bar while user registers on the server
                 progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
                 InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -174,21 +165,16 @@ public class RegisterFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                //hiding the progressbar after completion
                 progressBar.setVisibility(View.GONE);
 
                 try {
-                    //converting response to json object
                     JSONObject obj = new JSONObject(s);
 
-                    //if no error in response
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                        //getting the user from the response
                         JSONObject userJson = obj.getJSONObject("user");
 
-                        //creating a new user object
                         User user = new User(
                                 userJson.getInt("id"),
                                 userJson.getString("fname"),
@@ -200,10 +186,8 @@ public class RegisterFragment extends Fragment {
                                 userJson.getString("address")
                         );
 
-                        //storing the user in shared preferences
                         SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
                         System.out.println(SharedPrefManager.getInstance(getActivity().getApplicationContext()).isLoggedIn());
-                        //starting the profile activity
                         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
                         navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
                         Menu menu = navigationView.getMenu();
@@ -222,7 +206,6 @@ public class RegisterFragment extends Fragment {
             }
         }
 
-        //executing the async task
         RegisterUser ru = new RegisterUser();
         ru.execute();
     }

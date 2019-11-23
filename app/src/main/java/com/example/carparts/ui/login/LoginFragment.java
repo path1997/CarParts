@@ -42,7 +42,6 @@ import java.util.HashMap;
 
 public class LoginFragment extends Fragment {
     View root;
-    private LoginViewModel loginViewModel;
     EditText Fname,SName,PhoneNumber,Email,PostCode,City,Address,Password;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -94,14 +93,11 @@ public class LoginFragment extends Fragment {
         } else {
 
             root = inflater.inflate(R.layout.fragment_login, container, false);
-            /*super.onCreate(savedInstanceState);*/
 
             Email = (EditText) root.findViewById(R.id.Email);
             Password = (EditText) root.findViewById(R.id.Password);
 
 
-            //if user presses on login
-            //calling the method login
             root.findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -113,7 +109,6 @@ public class LoginFragment extends Fragment {
             root.findViewById(R.id.textViewRegister).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //open register screen
                     FragmentTransaction fr = getFragmentManager().beginTransaction();
                     fr.replace(R.id.nav_host_fragment, new RegisterFragment()).addToBackStack(null);
                     fr.commit();
@@ -124,11 +119,9 @@ public class LoginFragment extends Fragment {
 
     }
     private void userLogin() {
-        //first getting the values
         final String email = Email.getText().toString();
         final String password = Password.getText().toString();
 
-        //validating inputs
         if (TextUtils.isEmpty(email)) {
             Email.setError("Please enter your username");
             Email.requestFocus();
@@ -140,8 +133,6 @@ public class LoginFragment extends Fragment {
             Password.requestFocus();
             return;
         }
-
-        //if everything is fine
 
         class UserLogin extends AsyncTask<Void, Void, String> {
             ProgressBar progressBar;
@@ -158,21 +149,16 @@ public class LoginFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                //progressBar.setVisibility(View.GONE);
 
 
                 try {
-                    //converting response to json object
                     JSONObject obj = new JSONObject(s);
 
-                    //if no error in response
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                        //getting the user from the response
                         JSONObject userJson = obj.getJSONObject("user");
 
-                        //creating a new user object
                         User user = new User(
                                 userJson.getInt("id"),
                                 userJson.getString("fname"),
@@ -184,11 +170,8 @@ public class LoginFragment extends Fragment {
                                 userJson.getString("address")
                         );
 
-                        //storing the user in shared preferences
                         SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
 
-                        //starting the profile activity
-                        //getActivity().finish();
                         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
                         navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
                         Menu menu = navigationView.getMenu();
@@ -208,15 +191,12 @@ public class LoginFragment extends Fragment {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
 
-                //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
                 params.put("email", email);
                 params.put("password", password);
 
-                //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_LOGIN, params);
             }
         }
@@ -225,7 +205,6 @@ public class LoginFragment extends Fragment {
         ul.execute();
     }
     private void changedata() {
-        //first getting the values
         final String fname = Fname.getText().toString();
         final String sname = SName.getText().toString();
         final String phone = PhoneNumber.getText().toString();
@@ -234,7 +213,6 @@ public class LoginFragment extends Fragment {
         final String city = City.getText().toString();
         final String address = Address.getText().toString();
 
-        //validating inputs
         if (TextUtils.isEmpty(fname)) {
             Fname.setError("Please enter your first name");
             Fname.requestFocus();
@@ -278,7 +256,6 @@ public class LoginFragment extends Fragment {
             return;
         }
 
-        //if everything is fine
 
         class UserLogin extends AsyncTask<Void, Void, String> {
             ProgressBar progressBar;
@@ -297,13 +274,10 @@ public class LoginFragment extends Fragment {
 
 
                 try {
-                    //converting response to json object
                     JSONObject obj = new JSONObject(s);
 
-                    //if no error in response
                     if (!obj.getBoolean("error")) {
                         User user = new User(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getId(),fname,sname,email,phone,postcode,city,address);
-                        //storing the user in shared preferences
                         SharedPrefManager.getInstance(getActivity().getApplicationContext()).userLogin(user);
                         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
@@ -321,9 +295,8 @@ public class LoginFragment extends Fragment {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
-                //creating request parameters
+
                 int id=SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getId();
                 String ids=Integer.toString(id);
                 HashMap<String, String> params = new HashMap<>();
@@ -336,8 +309,6 @@ public class LoginFragment extends Fragment {
                 params.put("city", city);
                 params.put("address", address);
 
-
-                //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_CHANGEDATA, params);
             }
         }
@@ -346,7 +317,6 @@ public class LoginFragment extends Fragment {
         ul.execute();
     }
     private void loaddata() {
-        //first getting the values
         final String fname = Fname.getText().toString();
         final String sname = SName.getText().toString();
         final String phone = PhoneNumber.getText().toString();

@@ -3,14 +3,9 @@ package com.example.carparts;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by Belal on 9/5/2017.
- */
-
-//here for this class we are using a singleton pattern
 
 public class SharedPrefManager {
-    //the constants
+
     private static final String SHARED_PREF_NAME = "sharedpref"; // może krzaczyć
     private static final String KEY_FNAME = "keyfname";
     private static final String KEY_SNAME = "keysname";
@@ -35,8 +30,7 @@ public class SharedPrefManager {
         return mInstance;
     }
 
-    //method to let the user login
-    //this method will store the user data in shared preferences
+
     public void userLogin(User user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -51,13 +45,12 @@ public class SharedPrefManager {
         editor.apply();
     }
 
-    //this method will checker whether user is already logged in or not
     public static boolean isLoggedIn() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_FNAME, null) != null;
     }
 
-    //this method will give the logged in user
+
     public User getUser() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
@@ -83,12 +76,11 @@ public class SharedPrefManager {
         return sharedPreferences.getString(KEY_ID, null);
     }
 
-    //this method will logout the user
+
     public static void logout() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        //mCtx.startActivity(new Intent(mCtx, LoginFragment.class));
     }
 }

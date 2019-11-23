@@ -1,25 +1,21 @@
-package com.example.carparts;
+package com.example.carparts.ui.cart;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentTransaction;
+import com.example.carparts.DownLoadImageTask;
+import com.example.carparts.R;
+import com.example.carparts.RequestHandler;
+import com.example.carparts.URLs;
 
-import com.example.carparts.ui.register.RegisterFragment;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

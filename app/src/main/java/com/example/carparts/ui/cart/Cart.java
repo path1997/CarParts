@@ -1,4 +1,4 @@
-package com.example.carparts;
+package com.example.carparts.ui.cart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,10 +13,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carparts.ui.delivery.Delivery;
+import com.example.carparts.ui.product.ProductDetail;
+import com.example.carparts.R;
+import com.example.carparts.RequestHandler;
+import com.example.carparts.SharedPrefManager;
+import com.example.carparts.URLs;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,19 +30,6 @@ import java.util.HashMap;
 public class Cart extends AppCompatActivity {
     int[] idz;
     int suma=0;
-    /*static int suma=0;
-    static void plusSuma(int cena){
-        suma=suma+cena;
-    }
-    static void minusSuma(int cena){
-        suma=suma-cena;
-    }
-    static void zeroSuma(){
-        suma=0;
-    }
-    static void setSuma(int cena){
-        suma=cena;
-    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +53,8 @@ public class Cart extends AppCompatActivity {
         this.recreate();
         suma=0;
     }
-    private void getProducts() {
-        class UserLogin extends AsyncTask<Void, Void, String> {
+    public void getProducts() {
+        class Cartc extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
             @Override
@@ -78,15 +71,10 @@ public class Cart extends AppCompatActivity {
 
 
                 try {
-                    //converting response to json object
-                    //System.out.println("przed");
                     JSONObject obj = new JSONObject(s);
-                    //System.out.println("za");
-                    //if no error in response
-                    if (!obj.getBoolean("error")) {
-                        //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                        //getting the user from the response
+                    if (!obj.getBoolean("error")) {
+
                         JSONArray jsonArray = obj.getJSONArray("cart");
 
                         idz = new int[jsonArray.length()];
@@ -95,17 +83,16 @@ public class Cart extends AppCompatActivity {
                         String[] path = new String[jsonArray.length()];
                         int[] price = new int[jsonArray.length()];
                         int[] quantity = new int[jsonArray.length()];
-                        //suma=new int[jsonArray.length()];
                         System.out.println("elo");
                         for(int i=0;i<jsonArray.length();i++) {
-                            JSONObject category = jsonArray.getJSONObject(i);
-                            System.out.println(category.getString("price"));
-                            idz[i]= category.getInt("id");
-                            cid[i]= category.getString("cid");
-                            name[i]= category.getString("name");
-                            path[i]= category.getString("path");
-                            price[i]= category.getInt("price");
-                            quantity[i]= category.getInt("quantity");
+                            JSONObject cart = jsonArray.getJSONObject(i);
+                            System.out.println(cart.getString("price"));
+                            idz[i]= cart.getInt("id");
+                            cid[i]= cart.getString("cid");
+                            name[i]= cart.getString("name");
+                            path[i]= cart.getString("path");
+                            price[i]= cart.getInt("price");
+                            quantity[i]= cart.getInt("quantity");
                             suma+=price[i]*quantity[i];
                         }
 
@@ -139,20 +126,19 @@ public class Cart extends AppCompatActivity {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
+
                 RequestHandler requestHandler = new RequestHandler();
-                int id=SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+                int id= SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
                 String ids=Integer.toString(id);
-                //creating request parameters
+
                 HashMap<String, String> params = new HashMap<>();
                 params.put("user_id", ids);
 
-                //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_GETCART, params);
             }
         }
 
-        UserLogin ul = new UserLogin();
+        Cartc ul = new Cartc();
         ul.execute();
     }
 }

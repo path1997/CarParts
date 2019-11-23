@@ -3,23 +3,11 @@ package com.example.carparts;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.carparts.ui.add_announcement.AddAnnouncementFragment;
-import com.example.carparts.ui.all_announcement.AllAnnouncementFragment;
-import com.example.carparts.ui.category.CategoryFragment;
-import com.example.carparts.ui.contact.ContactFragment;
-import com.example.carparts.ui.home.HomeFragment;
-import com.example.carparts.ui.login.LoginFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.carparts.ui.cart.Cart;
 
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -33,10 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -174,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.bt_cart) {
-            Intent intent1 = new Intent(this,Cart.class);
+            Intent intent1 = new Intent(this, Cart.class);
             this.startActivity(intent1);
             return true;
         }

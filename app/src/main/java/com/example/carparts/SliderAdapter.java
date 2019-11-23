@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
-public class SliderAdapterExample extends
-        SliderViewAdapter<SliderAdapterExample.SliderAdapterVH> {
+public class SliderAdapter extends
+        SliderViewAdapter<SliderAdapter.SliderAdapterVH> {
 
     private Context context;
     private int mCount;
@@ -27,7 +27,7 @@ public class SliderAdapterExample extends
         this.path = path;
     }
 
-    public SliderAdapterExample(Context context) {
+    public SliderAdapter(Context context) {
         this.context = context;
     }
 

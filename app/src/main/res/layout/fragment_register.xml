@@ -8,14 +8,12 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="216dp"
-        android:layout_height="49dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="98dp"
+        android:layout_marginTop="10dp"
         android:text="Rejestracja"
         android:textAlignment="center"
         android:textSize="30dp" />
@@ -48,10 +46,8 @@
 
             <EditText
                 android:id="@+id/FName"
-                android:layout_width="183dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:inputType="text" />
 
             <TextView
@@ -63,10 +59,8 @@
 
             <EditText
                 android:id="@+id/SName"
-                android:layout_width="186dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
                 android:inputType="text" />
 
@@ -79,10 +73,8 @@
 
             <EditText
                 android:id="@+id/PhoneNumber"
-                android:layout_width="272dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
                 android:inputType="phone" />
 
@@ -95,10 +87,8 @@
 
             <EditText
                 android:id="@+id/Email"
-                android:layout_width="189dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
                 android:inputType="textEmailAddress" />
 
@@ -113,8 +103,6 @@
                 android:id="@+id/Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
                 android:inputType="textPassword" />
 
@@ -127,10 +115,8 @@
 
             <EditText
                 android:id="@+id/PostCode"
-                android:layout_width="191dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
                 android:inputType="textPostalAddress" />
 
@@ -145,8 +131,6 @@
                 android:id="@+id/City"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
                 android:inputType="text" />
 
@@ -161,8 +145,6 @@
                 android:id="@+id/Address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
                 android:inputType="text" />
 
@@ -171,15 +153,12 @@
 
     <Button
         android:id="@+id/buttonRegister"
-        android:layout_width="384dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="-12dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="0dp"
         android:text="Zarejestruj" />
     <ProgressBar
         android:visibility="gone"
