@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.carparts.R;
 import com.example.carparts.RequestHandler;
 import com.example.carparts.URLs;
+import com.example.carparts.ui.cart.Cart;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,9 +39,22 @@ public class ProductList extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.cart_menu, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.bt_cart) {
+            Intent intent1 = new Intent(this, Cart.class);
+            this.startActivity(intent1);
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
     private void getProducts() {
         class Productlist extends AsyncTask<Void, Void, String> {

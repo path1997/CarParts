@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -48,12 +49,20 @@ public class ProductDetail extends AppCompatActivity {
                 addToCart();
             }
         });
+        if(!SharedPrefManager.getInstance(getApplicationContext()).isLoggedIn()){
+            EditText ilosc=(EditText) findViewById(R.id.Ilosc);
+            ilosc.setVisibility(View.INVISIBLE);
+            Button buy=(Button) findViewById(R.id.btBuy);
+            buy.setVisibility(View.INVISIBLE);
+            TextView com=(TextView) findViewById(R.id.txNoLog);
+            com.setVisibility(View.VISIBLE);
+        }
 
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.cart_menu, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
     @Override

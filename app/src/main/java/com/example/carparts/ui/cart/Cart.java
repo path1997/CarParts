@@ -30,20 +30,27 @@ import java.util.HashMap;
 public class Cart extends AppCompatActivity {
     int[] idz;
     int suma=0;
+    int pusty;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pusty=1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         getProducts();
         findViewById(R.id.btdelivery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Delivery.class);
-                String suma1= Integer.toString(suma);
-                intent.putExtra("suma", suma1);
-                startActivity(intent);
-                finish();
-
+                if(!SharedPrefManager.getInstance(getApplicationContext()).isLoggedIn()){
+                    Toast.makeText(getApplicationContext(), "You must be logged in", Toast.LENGTH_SHORT).show();
+                } else if(pusty==1) {
+                    Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), Delivery.class);
+                    String suma1 = Integer.toString(suma);
+                    intent.putExtra("suma", suma1);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
@@ -52,8 +59,10 @@ public class Cart extends AppCompatActivity {
         super.onRestart();
         this.recreate();
         suma=0;
+        pusty=1;
     }
     public void getProducts() {
+        pusty=1;
         class Cartc extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
@@ -86,6 +95,7 @@ public class Cart extends AppCompatActivity {
                         System.out.println("elo");
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject cart = jsonArray.getJSONObject(i);
+                            pusty=0;
                             System.out.println(cart.getString("price"));
                             idz[i]= cart.getInt("id");
                             cid[i]= cart.getString("cid");

@@ -123,7 +123,12 @@ public class LoginFragment extends Fragment {
         final String password = Password.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
-            Email.setError("Please enter your username");
+            Email.setError("Please enter your email");
+            Email.requestFocus();
+            return;
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Email.setError("Enter a valid email");
             Email.requestFocus();
             return;
         }
@@ -149,13 +154,13 @@ public class LoginFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-
+                progressBar.setVisibility(View.GONE);
 
                 try {
                     JSONObject obj = new JSONObject(s);
 
                     if (!obj.getBoolean("error")) {
-                        Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
                         JSONObject userJson = obj.getJSONObject("user");
 
@@ -270,7 +275,7 @@ public class LoginFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                //progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
 
 
                 try {

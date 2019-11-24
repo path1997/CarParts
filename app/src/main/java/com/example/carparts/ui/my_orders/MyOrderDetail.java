@@ -89,7 +89,7 @@ public class MyOrderDetail extends AppCompatActivity {
                         TextView txdate=(TextView) findViewById(R.id.orderdate);
                         txdate.setText("Date of order: "+date.substring(0, 16));
                         TextView txname=(TextView) findViewById(R.id.ordername);
-                        txname.setText("Order "+idz[0]);
+                        txname.setText("Order "+id_order);
                         TextView totalcosttx=(TextView) findViewById(R.id.ordercost);
                         totalcosttx.setText("Total cost: "+totalcost+"zł");
                         TextView paymentTx=(TextView) findViewById(R.id.orderpayment);
