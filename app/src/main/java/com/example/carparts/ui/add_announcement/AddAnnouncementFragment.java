@@ -53,7 +53,7 @@ public class AddAnnouncementFragment extends Fragment {
     private static final int RESULT_LOAD_IMAGE = 1;
     //    private static final String SERVER_ADRESS = "masticable-stapler.000webhostapp.com";
 
-    private static final String SERVER_ADRESS = "https://masticable-stapler.000webhostapp.com/android/";
+    private static final String SERVER_ADRESS = "http://13.80.137.25/android/";
     protected int userID;
 
     private AddAnnouncementViewModel addAnnouncementViewModel;
