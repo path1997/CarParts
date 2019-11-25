@@ -56,6 +56,7 @@ public class LoginFragment extends Fragment {
             PostCode = (EditText) root.findViewById(R.id.PostCode);
             City = (EditText) root.findViewById(R.id.City);
             Address = (EditText) root.findViewById(R.id.Address);
+            ((MainActivity) getActivity()).setActionBarTitle("My account");
             loaddata();
 
 

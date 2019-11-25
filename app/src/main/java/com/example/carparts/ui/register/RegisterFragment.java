@@ -58,7 +58,7 @@ public class RegisterFragment extends Fragment {
         City = (EditText) root.findViewById(R.id.City);
         Address = (EditText) root.findViewById(R.id.Address);
         Password = (EditText) root.findViewById(R.id.Password);
-
+        ((MainActivity) getActivity()).setActionBarTitle("Register");
 
         root.findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override

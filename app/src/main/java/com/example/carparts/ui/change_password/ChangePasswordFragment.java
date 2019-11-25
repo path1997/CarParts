@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.carparts.MainActivity;
 import com.example.carparts.R;
 import com.example.carparts.RequestHandler;
 import com.example.carparts.SharedPrefManager;
@@ -38,7 +39,7 @@ public class ChangePasswordFragment extends Fragment {
             Password1 = (EditText) root.findViewById(R.id.password1);
             Password2 = (EditText) root.findViewById(R.id.password2);
             Password3 = (EditText) root.findViewById(R.id.password3);
-
+            ((MainActivity) getActivity()).setActionBarTitle("Change password");
             root.findViewById(R.id.buttonChange).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -90,7 +91,7 @@ public class ChangePasswordFragment extends Fragment {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-
+                progressBar.setVisibility(View.GONE);
 
                 try {
                     JSONObject obj = new JSONObject(s);
@@ -102,7 +103,7 @@ public class ChangePasswordFragment extends Fragment {
                         navigationView.getMenu().performIdentifierAction(R.id.nav_login, 0);
 
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Invalid old password", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

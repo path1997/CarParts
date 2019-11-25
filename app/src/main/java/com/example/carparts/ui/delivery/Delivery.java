@@ -55,6 +55,7 @@ public class Delivery extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Method of delivery and pay");
         setContentView(R.layout.activity_delivery);
         Bundle extras = getIntent().getExtras();
         String suma1=extras.getString("suma");

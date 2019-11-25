@@ -34,6 +34,7 @@ public class Cart extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pusty=1;
+        setTitle("Cart");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         getProducts();

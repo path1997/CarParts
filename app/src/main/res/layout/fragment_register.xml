@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
-        android:text="Rejestracja"
+        android:text="Register"
         android:textAlignment="center"
         android:textSize="30dp" />
 
@@ -159,7 +159,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
-        android:text="Zarejestruj" />
+        android:text="Register" />
     <ProgressBar
         android:visibility="gone"
         android:id="@+id/progressBar"

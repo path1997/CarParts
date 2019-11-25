@@ -31,6 +31,7 @@ public class MyOrderDetail extends AppCompatActivity {
         setContentView(R.layout.activity_my_order_detail);
         Bundle extras = getIntent().getExtras();
         id_order=extras.getString("idOrder");
+        setTitle("Order details");
         getMyOrDerdetail();
 
     }

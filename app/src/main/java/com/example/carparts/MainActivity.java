@@ -147,7 +147,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -35,7 +35,6 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
     public CartProductListCustomAdapter(Activity context,String[] cid, int[] id, String[] name, String[] path, int[] price,int[] quantity, int type) {
         super(context, R.layout.cart_listview_layout, name);
         this.context = context;
-        // this.urls = urls;
         this.name = name;
         this.path = path;
         this.price=price;
@@ -50,8 +49,6 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
         View listViewItem = inflater.inflate(R.layout.cart_listview_layout, null, true);
         TextView nameTx = (TextView) listViewItem.findViewById(R.id.txname);
         TextView  priceTx = (TextView) listViewItem.findViewById(R.id.txprice);
-        // TextView textView = (TextView) listViewItem.findViewById(R.id.tvurl);
-        //  textView.setText(urls[position] );
         nameTx.setText(name[position] );
         final String ids=Integer.toString(id[position]);
         if(type==1){
@@ -64,32 +61,28 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
 
         }
 
-       /* listViewItem.findViewById(R.id.btDelete).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ProductDetail.class);
-                intent.putExtra("id_product", ids);
-                context.startActivity(intent);
-            }
-        });*/
+
        listViewItem.findViewById(R.id.btMinus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //open register screen
-                minusItem(cid[position]);
+                if(quantity[position]==1){
+                    removeItem(cid[position]);
+                } else {
+                    minusItem(cid[position]);
+                }
             }
         });
         listViewItem.findViewById(R.id.btPlus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //open register screen
+
                 plusItem(cid[position]);
             }
         });
         listViewItem.findViewById(R.id.btRemove).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //open register screen
+
                 removeItem(cid[position]);
 
             }
@@ -100,7 +93,7 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
         return  listViewItem;
     }
     private void minusItem(final String ids) {
-        class UserLogin extends AsyncTask<Void, Void, String> {
+        class MinusItem extends AsyncTask<Void, Void, String> {
             String idp=ids;
             ProgressBar progressBar;
             @Override
@@ -117,11 +110,7 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
 
 
                 try {
-                    //converting response to json object
-                    //System.out.println("przed");
                     JSONObject obj = new JSONObject(s);
-                    //System.out.println("za");
-                    //if no error in response
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(context.getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         context.recreate();
@@ -135,22 +124,22 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
+
                 RequestHandler requestHandler = new RequestHandler();
-                //creating request parameters
+
                 HashMap<String, String> params = new HashMap<>();
                 params.put("id", idp);
 
-                //returing the response
+
                 return requestHandler.sendPostRequest(URLs.URL_MINUSITEM, params);
             }
         }
 
-        UserLogin ul = new UserLogin();
+        MinusItem ul = new MinusItem();
         ul.execute();
     }
     private void plusItem(final String ids) {
-        class UserLogin extends AsyncTask<Void, Void, String> {
+        class PlusItem extends AsyncTask<Void, Void, String> {
             String idp=ids;
             ProgressBar progressBar;
             @Override
@@ -167,11 +156,9 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
 
 
                 try {
-                    //converting response to json object
-                    //System.out.println("przed");
+
                     JSONObject obj = new JSONObject(s);
-                    //System.out.println("za");
-                    //if no error in response
+
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(context.getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         context.recreate();
@@ -185,22 +172,22 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
+
                 RequestHandler requestHandler = new RequestHandler();
-                //creating request parameters
+
                 HashMap<String, String> params = new HashMap<>();
                 params.put("id", idp);
 
-                //returing the response
+
                 return requestHandler.sendPostRequest(URLs.URL_PLUSITEM, params);
             }
         }
 
-        UserLogin ul = new UserLogin();
+        PlusItem ul = new PlusItem();
         ul.execute();
     }
     private void removeItem(final String ids) {
-        class UserLogin extends AsyncTask<Void, Void, String> {
+        class RemoveItem extends AsyncTask<Void, Void, String> {
             String idp=ids;
             ProgressBar progressBar;
             @Override
@@ -217,11 +204,9 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
 
 
                 try {
-                    //converting response to json object
-                    //System.out.println("przed");
+
                     JSONObject obj = new JSONObject(s);
-                    //System.out.println("za");
-                    //if no error in response
+
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(context.getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         context.recreate();
@@ -235,18 +220,18 @@ public class CartProductListCustomAdapter extends ArrayAdapter<String> {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //creating request handler object
+
                 RequestHandler requestHandler = new RequestHandler();
-                //creating request parameters
+
                 HashMap<String, String> params = new HashMap<>();
                 params.put("id", idp);
 
-                //returing the response
+
                 return requestHandler.sendPostRequest(URLs.URL_REMOVEITEM, params);
             }
         }
 
-        UserLogin ul = new UserLogin();
+        RemoveItem ul = new RemoveItem();
         ul.execute();
     }
 }
