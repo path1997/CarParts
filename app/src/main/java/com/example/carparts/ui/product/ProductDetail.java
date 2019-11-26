@@ -43,21 +43,17 @@ public class ProductDetail extends AppCompatActivity {
         id_product=extras.getString("id_product");
         ilosc=(EditText) findViewById(R.id.Ilosc);
         getDetails();
-        findViewById(R.id.btBuy).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addToCart();
-            }
-        });
+        Button buy=(Button) findViewById(R.id.btBuy);
+
         if(!SharedPrefManager.getInstance(getApplicationContext()).isLoggedIn()){
             EditText ilosc=(EditText) findViewById(R.id.Ilosc);
             ilosc.setVisibility(View.INVISIBLE);
-            Button buy=(Button) findViewById(R.id.btBuy);
             buy.setVisibility(View.INVISIBLE);
             TextView com=(TextView) findViewById(R.id.txNoLog);
             com.setVisibility(View.VISIBLE);
+        } else {
+            buy.setEnabled(false);
         }
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,15 +99,18 @@ public class ProductDetail extends AppCompatActivity {
                     if (!obj.getBoolean("error")) {
 
                         JSONArray jsonArray = obj.getJSONArray("productdetail");
-
+                        Button buy=(Button) findViewById(R.id.btBuy);
                         String[] name = new String[jsonArray.length()];
                         String[] description = new String[jsonArray.length()];
                         String[] price = new String[jsonArray.length()];
+                        final int[] available = new int[jsonArray.length()];
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject productdetail = jsonArray.getJSONObject(i);
                             name[i]= productdetail.getString("name");
                             description[i]= productdetail.getString("description");
                             price[i]= productdetail.getString("price");
+                            available[i]=productdetail.getInt("quantity");
+
                         }
                         setTitle(name[0]);
                         jsonArray = obj.getJSONArray("productphotos");
@@ -133,15 +132,31 @@ public class ProductDetail extends AppCompatActivity {
                         sliderView.setAutoCycle(false);
 
                         TextView tvTitle= (TextView) findViewById(R.id.tvTitle);
+                        TextView tvAvailable= (TextView) findViewById(R.id.tvAvailable);
                         TextView tvDescription= (TextView) findViewById(R.id.tvDesc);
                         TextView tvPrice= (TextView) findViewById(R.id.tvPrice);
                         tvTitle.setText(name[0]);
+                        tvAvailable.setText("Available: "+String.valueOf(available[0])+" pieces");
                         tvDescription.setText(description[0]);
                         tvPrice.setText("Cena: "+price[0]+"zł");
+                        if(available[0]>0){
+                            buy.setEnabled(true);
+                        }
+                        findViewById(R.id.btBuy).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                int ilosc1=Integer.parseInt(ilosc.getText().toString());
+                                if(available[0]>=ilosc1) {
+                                    addToCart();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "We have not this product anymore", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -182,7 +197,7 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-
+                progressBar.setVisibility(View.GONE);
                 try {
                     JSONObject obj = new JSONObject(s);
 
@@ -192,7 +207,7 @@ public class ProductDetail extends AppCompatActivity {
 
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

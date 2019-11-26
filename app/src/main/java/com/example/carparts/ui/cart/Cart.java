@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,15 +29,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cart extends AppCompatActivity {
-    int[] idz;
-    int suma=0;
+    ArrayList<Integer> idz=new ArrayList<Integer>();
+    ArrayList<String> cid=new ArrayList<String>();
+    ArrayList<String> name=new ArrayList<String>();
+    ArrayList<String> path=new ArrayList<String>();
+    ArrayList<Integer> price=new ArrayList<Integer>();
+    ArrayList<Integer> quantity=new ArrayList<Integer>();
+    public static TextView wartosczamowienia;
+    public static ListView listView;
+    public static CartProductListCustomAdapter customadapter;
+    public static int suma=0;
     int pusty;
+    static void minussum(int value){
+        suma-=value;
+        wartosczamowienia.setText("Total order value : "+suma+"zł");
+    }
+    static void plussum(int value){
+        suma+=value;
+        wartosczamowienia.setText("Total order value : "+suma+"zł");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         pusty=1;
         setTitle("Cart");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        wartosczamowienia=(TextView) findViewById(R.id.Wartosc);
         getProducts();
         findViewById(R.id.btdelivery).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +83,7 @@ public class Cart extends AppCompatActivity {
     }
     public void getProducts() {
         pusty=1;
+
         class Cartc extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
@@ -87,43 +107,40 @@ public class Cart extends AppCompatActivity {
 
                         JSONArray jsonArray = obj.getJSONArray("cart");
 
-                        idz = new int[jsonArray.length()];
-                        String[] cid = new String[jsonArray.length()];
-                        String[] name = new String[jsonArray.length()];
-                        String[] path = new String[jsonArray.length()];
-                        int[] price = new int[jsonArray.length()];
-                        int[] quantity = new int[jsonArray.length()];
+                        suma=0;
                         System.out.println("elo");
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject cart = jsonArray.getJSONObject(i);
                             pusty=0;
                             System.out.println(cart.getString("price"));
-                            idz[i]= cart.getInt("id");
-                            cid[i]= cart.getString("cid");
-                            name[i]= cart.getString("name");
-                            path[i]= cart.getString("path");
-                            price[i]= cart.getInt("price");
-                            quantity[i]= cart.getInt("quantity");
-                            suma+=price[i]*quantity[i];
+                            idz.add(cart.getInt("id"));
+                            cid.add(cart.getString("cid"));
+                            name.add(cart.getString("name"));
+                            path.add(cart.getString("path"));
+                            price.add(cart.getInt("price"));
+                            quantity.add(cart.getInt("quantity"));
+
+                            suma+=price.get(i)*quantity.get(i);
                         }
 
 
-                        CartProductListCustomAdapter customadapter;
-                        final ListView listView=(ListView) findViewById(R.id.listviewcart);
+
+                        listView=(ListView) findViewById(R.id.listviewcart);
                         customadapter = new CartProductListCustomAdapter(Cart.this,cid,idz,name,path,price,quantity,0 );
                         listView.setAdapter(customadapter);
-                        TextView wartosczamowienia=(TextView) findViewById(R.id.Wartosc);
+
                         wartosczamowienia.setText("Total order value : "+suma+"zł");
                         wartosczamowienia.setGravity(Gravity.CENTER);
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent intent = new Intent(getApplicationContext(), ProductDetail.class);
-                                String idP=Long.toString(idz[position]);
+                                String idP=Long.toString(idz.get(position));
                                 intent.putExtra("id_product", idP);
                                 startActivity(intent);
                             }
                         });
+
 
 
 

@@ -117,9 +117,9 @@ public class Delivery extends AppCompatActivity {
                 final RadioButton payment = (RadioButton) findViewById(radioGroup2.getCheckedRadioButtonId());
                 int position = radioGroup2.indexOfChild(payment);
                 if(position==0){
-                    paypal();
+                    addReservation(1);
                 } else {
-                    addOrder(0);
+                    addReservation(0);
                 }
             }
         });
@@ -142,6 +142,7 @@ public class Delivery extends AppCompatActivity {
                 }
             } else if(resultCode== Activity.RESULT_CANCELED) {
                 Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show();
+                removeReservation();
             }
         } else if(resultCode== PaymentActivity.RESULT_EXTRAS_INVALID) {
             Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
@@ -176,10 +177,10 @@ public class Delivery extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         finish();
-;
+
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -201,6 +202,108 @@ public class Delivery extends AppCompatActivity {
                 params.put("sum", suma1);
 
                 return requestHandler.sendPostRequest(URLs.URL_CONFIRMORDER, params);
+            }
+        }
+        Deliveryc ul = new Deliveryc();
+        ul.execute();
+    }
+    void addReservation(final int payment){
+        class Deliveryc extends AsyncTask<Void, Void, String> {
+            ProgressBar progressBar;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            private ArrayList<String> arrayList;
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                progressBar.setVisibility(View.GONE);
+
+
+                try {
+
+                    JSONObject obj = new JSONObject(s);
+
+                    if (!obj.getBoolean("error")) {
+                        if(payment==0){
+                            addOrder(payment);
+                        } else {
+                            paypal();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+
+                RequestHandler requestHandler = new RequestHandler();
+                int id = SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+                String ids = Integer.toString(id);
+
+                HashMap<String, String> params = new HashMap<>();
+                params.put("user_id", ids);
+
+                return requestHandler.sendPostRequest(URLs.URL_ADDRESERVATION, params);
+            }
+        }
+        Deliveryc ul = new Deliveryc();
+        ul.execute();
+    }
+    void removeReservation(){
+        class Deliveryc extends AsyncTask<Void, Void, String> {
+            ProgressBar progressBar;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            private ArrayList<String> arrayList;
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                progressBar.setVisibility(View.GONE);
+
+
+                try {
+
+                    JSONObject obj = new JSONObject(s);
+
+                    if (!obj.getBoolean("error")) {
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+
+                RequestHandler requestHandler = new RequestHandler();
+                int id = SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+                String ids = Integer.toString(id);
+
+                HashMap<String, String> params = new HashMap<>();
+                params.put("user_id", ids);
+
+                return requestHandler.sendPostRequest(URLs.URL_REMOVERESERVATION, params);
             }
         }
         Deliveryc ul = new Deliveryc();

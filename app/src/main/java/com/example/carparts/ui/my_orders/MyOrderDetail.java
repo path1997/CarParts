@@ -25,6 +25,12 @@ import java.util.HashMap;
 
 public class MyOrderDetail extends AppCompatActivity {
     String id_order;
+    ArrayList<Integer> idz=new ArrayList<Integer>();
+    ArrayList<String> cid=new ArrayList<String>();
+    ArrayList<String> name=new ArrayList<String>();
+    ArrayList<String> path=new ArrayList<String>();
+    ArrayList<Integer> price=new ArrayList<Integer>();
+    ArrayList<Integer> quantity=new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,24 +65,18 @@ public class MyOrderDetail extends AppCompatActivity {
 
                         JSONArray jsonArray = obj.getJSONArray("orderdetail");
 
-                        int[] idz = new int[jsonArray.length()];
-                        String[] cid = new String[jsonArray.length()];
-                        String[] name = new String[jsonArray.length()];
-                        String[] path = new String[jsonArray.length()];
-                        int[] price = new int[jsonArray.length()];
-                        int[] quantity = new int[jsonArray.length()];
 
                         System.out.println("elo");
                         String totalcost="",date="",payment="";
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject myorder = jsonArray.getJSONObject(i);
                             System.out.println(myorder.getString("price"));
-                            idz[i]= myorder.getInt("id");
-                            cid[i]= myorder.getString("cid");
-                            name[i]= myorder.getString("name");
-                            path[i]= myorder.getString("path");
-                            price[i]= myorder.getInt("price");
-                            quantity[i]= myorder.getInt("quantity");
+                            idz.add(myorder.getInt("id"));
+                            cid.add(myorder.getString("cid"));
+                            name.add(myorder.getString("name"));
+                            path.add(myorder.getString("path"));
+                            price.add(myorder.getInt("price"));
+                            quantity.add(myorder.getInt("quantity"));
                             totalcost=myorder.getString("totalcost");
                             date=myorder.getString("date_of_order");
                             payment=myorder.getString("payment");
