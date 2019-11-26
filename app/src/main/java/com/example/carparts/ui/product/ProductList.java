@@ -33,8 +33,9 @@ public class ProductList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
         Bundle extras = getIntent().getExtras();
-        category=extras.getString("name_cat");
-        setTitle(category);
+        category=extras.getString("id");
+        String category_name=extras.getString("name_cat");
+        setTitle(category_name);
         getProducts();
     }
     @Override
@@ -125,7 +126,7 @@ public class ProductList extends AppCompatActivity {
 
 
                 HashMap<String, String> params = new HashMap<>();
-                params.put("name_category", category);
+                params.put("id", category);
 
 
                 return requestHandler.sendPostRequest(URLs.URL_PRODUCTLIST, params);

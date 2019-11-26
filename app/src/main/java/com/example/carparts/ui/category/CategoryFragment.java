@@ -50,8 +50,8 @@ public class CategoryFragment extends Fragment {
                 progressBar = (ProgressBar) root.findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
             }
-            private ArrayList<String> arrayList;
-
+            ArrayList<String> arrayList;
+            ArrayList<String> idc;
 
             @Override
             protected void onPostExecute(String s) {
@@ -69,11 +69,12 @@ public class CategoryFragment extends Fragment {
                         final ListView listView=(ListView) getActivity().findViewById(R.id.rl);
 
                         arrayList = new ArrayList<String>();
+                        idc = new ArrayList<String>();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject category = jsonArray.getJSONObject(i);
+                            arrayList.add(category.getString("name"));
+                            idc.add(category.getString("id"));
 
-                            String name = category.getString("name");
-                            arrayList.add(name);
                         }
                         ArrayAdapter<String> aAdaptor = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.custom_layout, arrayList ) {
 
@@ -81,7 +82,6 @@ public class CategoryFragment extends Fragment {
                             public View getView(int position, View convertView, ViewGroup parent) {
 
                                 TextView textView = (TextView) super.getView(position, convertView, parent);
-
                                 return textView;
                             }
                         };
@@ -92,6 +92,7 @@ public class CategoryFragment extends Fragment {
                                 Intent intent = new Intent(getActivity().getApplicationContext(), ProductList.class);
                                 String item = arrayList.get(position);
                                 intent.putExtra("name_cat", item);
+                                intent.putExtra("id", idc.get(position));
                                 startActivity(intent);
                             }
                         });
