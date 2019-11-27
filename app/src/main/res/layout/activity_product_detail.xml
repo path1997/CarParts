@@ -11,6 +11,7 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/v_flipper"/>-->
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cos"
         android:layout_width="match_parent"
@@ -52,10 +53,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btBuy"
+        android:layout_above="@+id/tvAvailable"
         android:layout_below="@+id/cos"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,6 +104,18 @@
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="0dp"
         android:text="Add to cart" />
+
+    <TextView
+        android:id="@+id/tvAvailable"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_above="@+id/txNoLog"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="185dp"
+        android:layout_marginBottom="0dp"
+        android:textSize="22dp" />
 
     <EditText
         android:id="@+id/Ilosc"
