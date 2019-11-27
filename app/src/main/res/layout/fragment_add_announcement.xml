@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Title" />
+            android:hint="Title"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/et_price_add_ann"
@@ -44,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Price" />
+            android:hint="Price"
+            android:inputType="numberSigned|textPersonName" />
 
         <EditText
             android:id="@+id/et_description_add_ann"
@@ -53,8 +53,8 @@
             android:layout_height="73dp"
             android:layout_margin="16dp"
             android:ems="10"
+            android:hint="Description"
             android:inputType="textPersonName"
-            android:text="Description"
             android:textAlignment="viewStart" />
 
         <Button

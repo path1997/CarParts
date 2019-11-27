@@ -1,7 +1,10 @@
 package com.example.carparts.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,7 +33,6 @@ public class AnnouncementDetail extends AppCompatActivity {
         id_announcement=extras.getString("id_announcement");
         getAnnouncementDeatil();
     }
-
 
     private void getAnnouncementDeatil(){
         class Announcementdetail extends AsyncTask<Void, Void, String> {
@@ -70,9 +72,6 @@ public class AnnouncementDetail extends AppCompatActivity {
 
                         ImageView image = (ImageView) findViewById(R.id.im_ann_detail);
                         new DownLoadImageTask(image).execute(URLs.URL_PPHOTO+path[0]);
-//
-//                        ImageView image = (ImageView) listViewItem.findViewById(R.id.imimage);
-//                        new DownLoadImageTask(image).execute(URLs.URL_PPHOTO+path[position]);
 
                         TextView tvTitle= (TextView) findViewById(R.id.tv_ann_title);
                         TextView tvPrice= (TextView) findViewById(R.id.tv_ann_price);
@@ -84,6 +83,17 @@ public class AnnouncementDetail extends AppCompatActivity {
                         tvDescription.setText(description[0]);
                         tvphone.setText(phone[0]);
                         tvfname_city.setText(fname[0] + ", " + city[0]);
+
+                        final String phonee = phone[0];
+
+                        findViewById(R.id.tv_ann_phone).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Intent.ACTION_DIAL);
+                                intent.setData(Uri.parse("tel:"+phonee));
+                                startActivity(intent);
+                            }
+                        });
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

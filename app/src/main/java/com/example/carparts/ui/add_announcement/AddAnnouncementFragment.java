@@ -29,6 +29,7 @@ import com.example.carparts.R;
 import com.example.carparts.RequestHandler;
 import com.example.carparts.SharedPrefManager;
 import com.example.carparts.URLs;
+import com.google.android.material.navigation.NavigationView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -97,7 +98,6 @@ public class AddAnnouncementFragment extends Fragment {
                 uploadImage = new UploadImage(image, namePhoto);
                 uploadImage.execute();
                 addAnnouncement(uploadImage.getPhotoName());
-               // addAnnouncement();
             }
         });
         return root;
@@ -246,7 +246,8 @@ public class AddAnnouncementFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 //
 
-
+                        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+                navigationView.getMenu().performIdentifierAction(R.id.nav_all_announcement, 0);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

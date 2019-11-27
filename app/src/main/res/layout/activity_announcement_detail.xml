@@ -60,9 +60,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="36dp"
-        android:text="TextView" />
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tv_ann_fname_number"
@@ -72,9 +73,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="45dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="36dp"
-        android:text="TextView" />
+        android:layout_marginBottom="16dp"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
 </RelativeLayout>
