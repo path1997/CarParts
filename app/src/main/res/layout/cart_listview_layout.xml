@@ -26,7 +26,7 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="3dp"
             android:layout_toEndOf="@+id/imimage"
-            android:textSize="17dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/txprice"
@@ -36,7 +36,7 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/imimage"
-            android:textSize="17dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/btMinus"
@@ -48,7 +48,7 @@
             android:layout_toEndOf="@+id/txprice"
             android:text="-"
             android:textAlignment="center"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/btPlus"
@@ -60,7 +60,7 @@
             android:layout_marginEnd="5dp"
             android:text="+"
             android:textAlignment="center"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:visible="true" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_toEndOf="@+id/txname"
             android:text="Remove item"
             android:textAlignment="center"
-            android:textSize="17dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/txquantity"
@@ -88,7 +88,7 @@
             android:layout_toStartOf="@+id/btPlus"
             android:layout_toEndOf="@+id/btMinus"
             android:textAlignment="center"
-            android:textSize="22dp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/txitemsum"
@@ -100,7 +100,7 @@
             android:layout_marginEnd="0dp"
             android:layout_toStartOf="@+id/btMinus"
             android:layout_toEndOf="@+id/imimage"
-            android:textSize="17dp" />
+            android:textSize="17sp" />
 
     </RelativeLayout>
 </LinearLayout>

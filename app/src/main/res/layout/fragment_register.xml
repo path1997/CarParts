@@ -16,7 +16,7 @@
         android:layout_marginTop="10dp"
         android:text="Register"
         android:textAlignment="center"
-        android:textSize="30dp" />
+        android:textSize="30sp" />
 
     <ScrollView
         android:id="@+id/scrollview"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="First name"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <EditText
                 android:id="@+id/FName"
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Second name"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <EditText
                 android:id="@+id/SName"
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Phone number"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <EditText
                 android:id="@+id/PhoneNumber"
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Email"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <EditText
                 android:id="@+id/Email"
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Password"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <EditText
                 android:id="@+id/Password"
@@ -111,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Post code"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <EditText
                 android:id="@+id/PostCode"
@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="City"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <EditText
                 android:id="@+id/City"
@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Address"
-                android:textSize="23dp" />
+                android:textSize="23sp" />
 
             <EditText
                 android:id="@+id/Address"
