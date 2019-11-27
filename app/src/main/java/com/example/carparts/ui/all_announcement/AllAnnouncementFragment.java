@@ -1,10 +1,12 @@
 package com.example.carparts.ui.all_announcement;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -13,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.carparts.ui.AnnouncementDetail;
+import com.example.carparts.ui.product.ProductDetail;
 import com.example.carparts.ui.product.ProductListCustomAdapter;
 import com.example.carparts.R;
 import com.example.carparts.RequestHandler;
@@ -48,7 +52,7 @@ public class AllAnnouncementFragment extends Fragment {
     public void getAllAnnouncement(){
 
         class AllAnnouncement extends AsyncTask<Void, Void, String> {
-            //private String ida[];
+            private String ida[];
             private ImageView imageView;
             private ArrayList<String> arrayList;
             @Override
@@ -76,13 +80,13 @@ public class AllAnnouncementFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         JSONArray jsonArray = obj.getJSONArray("allannouncement");
 
-                        //ida=new String[jsonArray.length()];
+                        ida=new String[jsonArray.length()];
                         String[] title = new String[jsonArray.length()];
                         String[] path = new String[jsonArray.length()];
                         String[] price = new String[jsonArray.length()];
                         for(int i=0;i<jsonArray.length();i++) {
                             JSONObject producthome = jsonArray.getJSONObject(i);
-                            //ida[i]= producthome.getString("id");
+                            ida[i]= producthome.getString("id");
                             title[i]= producthome.getString("title");
                             price[i]= producthome.getString("price");
                             path[i]= producthome.getString("path");
@@ -93,15 +97,15 @@ public class AllAnnouncementFragment extends Fragment {
                         customadapter1 = new ProductListCustomAdapter(getActivity(),title,path,price);
                         listView.setAdapter(customadapter1);
 
-//                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                                Intent intent = new Intent(getActivity().getApplicationContext(), ProductDetail.class);
-//                                String idP=ida[position];
-//                                intent.putExtra("id_product", idP);
-//                                startActivity(intent);
-//                            }
-//                        });
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(getActivity().getApplicationContext(), AnnouncementDetail.class);
+                                String idP=ida[position];
+                                intent.putExtra("id_announcement", idP);
+                                startActivity(intent);
+                            }
+                        });
 
                     }
 

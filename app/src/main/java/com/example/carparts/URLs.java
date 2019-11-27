@@ -24,4 +24,5 @@ public class URLs {
     public static final String URL_GETMYORDER ="http://13.80.137.25/android/order.php?apicall=getmyorder";
     public static final String URL_GETMYORDERDETAIL ="http://13.80.137.25/android/order.php?apicall=getmyorderdetail";
     public static final String URL_ALLANNOUNCEMENT ="http://13.80.137.25/android/announcement.php?apicall=allannouncement";
+    public static final String URL_ANNOUNCEMENTDETAIL ="http://13.80.137.25/android/announcement.php?apicall=announcementdetail";
 }

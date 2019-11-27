@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
                         //Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         JSONArray jsonArray = obj.getJSONArray("productlistforhome");
 
-                        ida=new String[jsonArray.length()];;
+                        ida=new String[jsonArray.length()];
                         String[] name = new String[jsonArray.length()];
                         String[] path = new String[jsonArray.length()];
                         String[] price = new String[jsonArray.length()];

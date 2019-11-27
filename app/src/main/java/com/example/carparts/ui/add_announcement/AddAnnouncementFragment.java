@@ -119,7 +119,6 @@ public class AddAnnouncementFragment extends Fragment {
         int number;
 
         public UploadImage(Bitmap image, String name) {
-            //TODO: do usuniecia i ostatni z bazy
             number = ++NUM_PHOTO;
             this.image = image;
             this.name = name + number;

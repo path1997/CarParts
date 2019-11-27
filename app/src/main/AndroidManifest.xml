@@ -39,6 +39,7 @@
             android:name=".Geolocation"
             android:label="@string/title_activity_geolocation" />
         <activity android:name=".ui.product.ProductDetail" />
+        <activity android:name=".ui.AnnouncementDetail" />
         <activity android:name=".ui.product.ProductList" />
         <activity android:name=".product_list" />
         <activity
