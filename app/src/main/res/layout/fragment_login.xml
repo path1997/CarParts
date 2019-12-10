@@ -50,7 +50,7 @@
             android:layout_marginBottom="8dp"
             android:text="Dont' have an account?\nRegister Here"
             android:textAlignment="center"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

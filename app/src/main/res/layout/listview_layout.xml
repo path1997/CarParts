@@ -29,7 +29,7 @@
             android:layout_marginEnd="84dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txprice"
@@ -42,6 +42,6 @@
             android:layout_marginEnd="83dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
     </RelativeLayout>
 </LinearLayout>

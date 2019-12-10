@@ -70,7 +70,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:textAlignment="center"
-                android:textSize="24dp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tvDesc"
@@ -79,7 +79,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:textAlignment="center"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvPrice"
@@ -88,7 +88,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:textAlignment="center"
-                android:textSize="22dp" />
+                android:textSize="22sp" />
 
         </LinearLayout>
     </ScrollView>
@@ -115,7 +115,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginEnd="185dp"
         android:layout_marginBottom="0dp"
-        android:textSize="22dp" />
+        android:textSize="22sp" />
 
     <EditText
         android:id="@+id/Ilosc"
@@ -145,7 +145,7 @@
         android:layout_marginBottom="0dp"
         android:text="Log in to add the product to the cart"
         android:textAlignment="center"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:visibility="invisible" />
 
 </RelativeLayout>

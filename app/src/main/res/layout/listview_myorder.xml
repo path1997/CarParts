@@ -21,7 +21,7 @@
             android:layout_marginEnd="0dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/ordercost"
@@ -32,7 +32,7 @@
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/orderdate"
@@ -45,6 +45,6 @@
             android:layout_marginEnd="0dp"
             android:layout_toEndOf="@+id/txprice"
             android:text="TextView"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 </LinearLayout>
