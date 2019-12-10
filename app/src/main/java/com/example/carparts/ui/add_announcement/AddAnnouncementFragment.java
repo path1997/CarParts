@@ -1,5 +1,6 @@
 package com.example.carparts.ui.add_announcement;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -7,7 +8,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +32,13 @@ import com.example.carparts.R;
 import com.example.carparts.RequestHandler;
 import com.example.carparts.SharedPrefManager;
 import com.example.carparts.URLs;
+import com.example.carparts.config.Config;
 import com.google.android.material.navigation.NavigationView;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -44,6 +53,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -52,24 +62,41 @@ import static com.example.carparts.SharedPrefManager.isLoggedIn;
 
 public class AddAnnouncementFragment extends Fragment {
     private static final int RESULT_LOAD_IMAGE = 1;
-    //    private static final String SERVER_ADRESS = "masticable-stapler.000webhostapp.com";
+    private static final int PAYPAL_REQUEST_CODE = 7171;
+    private static final int COST_ANNOUNCEMENT = 10;
+    //String amount_month = "";
+    int sum;
+    double cost;
+        private static PayPalConfiguration config = new PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(Config.PAYPAL_CLIENT_ID);
 
     private static final String SERVER_ADRESS = "http://13.80.137.25/android/";
     protected int userID;
 
     private AddAnnouncementViewModel addAnnouncementViewModel;
 
-    private EditText editTextTitle, editTextDescription, editTextPrice;
+    private EditText editTextTitle, editTextDescription, editTextPrice, et_how_month_add_ann;
+    private TextView tv_cost_add_ann;
     private ImageView imageViewUploadImage;
     private Button buttonUploadImage, buttonAddAnnouncement;
     private String namePhoto = "photo";
     private static int NUM_PHOTO = 0;
     private UploadImage uploadImage;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    public void onDestroy() {
+        getActivity().stopService(new Intent(getActivity(), PayPalService.class));
+        super.onDestroy();
+    }
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         addAnnouncementViewModel = ViewModelProviders.of(this).get(AddAnnouncementViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_announcement, container, false);
+
+        Intent intent = new Intent(getActivity(), PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        getActivity().startService(intent);
 
         editTextTitle = (EditText) root.findViewById(R.id.et_title_add_ann);
         editTextDescription = (EditText) root.findViewById(R.id.et_description_add_ann);
@@ -77,7 +104,47 @@ public class AddAnnouncementFragment extends Fragment {
         imageViewUploadImage = (ImageView) root.findViewById(R.id.im_add);
         buttonUploadImage = (Button) root.findViewById(R.id.btn_add_image);
         buttonAddAnnouncement = (Button) root.findViewById(R.id.btn_add_ann);
+        tv_cost_add_ann = (TextView) root.findViewById(R.id.tv_cost_add_ann);
 
+        et_how_month_add_ann = (EditText) root.findViewById(R.id.et_how_month_add_ann);
+
+        et_how_month_add_ann.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+
+                System.out.println("Sumka" + sum);
+                if (!et_how_month_add_ann.getText().toString().equals("")) {
+                    sum = Integer.valueOf(et_how_month_add_ann.getText().toString());
+                    if (sum >= 0 && sum < 3) {
+                        cost = COST_ANNOUNCEMENT * sum * 0.9;
+                        cost = Math.round(cost * 100.) / 100.;
+                    }
+                    if (sum >= 3 && sum < 6) {
+                        cost = COST_ANNOUNCEMENT * sum * 0.8;
+                        cost = Math.round(cost * 100.) / 100.;
+                    }
+                    if (sum >= 6 && sum < 9) {
+                        cost = COST_ANNOUNCEMENT * sum * 0.7;
+                        cost = Math.round(cost * 100.) / 100.;
+                    }
+                    if (sum >= 9 && sum < 12) {
+                        cost = COST_ANNOUNCEMENT * sum * 0.6;
+                        cost = Math.round(cost * 100.) / 100.;
+                    }
+                    if (sum >= 12) {
+                        cost = COST_ANNOUNCEMENT * sum * 0.5;
+                        cost = Math.round(cost * 100.) / 100.;
+                    }
+                }
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
+
+        tv_cost_add_ann.setText("Total cost: " + cost + "zł");
 
         root.findViewById(R.id.btn_add_image).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,16 +159,22 @@ public class AddAnnouncementFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Bitmap image = ((BitmapDrawable) imageViewUploadImage.getDrawable()).getBitmap();
-////                uploadImage = new UploadImage(image, namePhoto);
-//                new UploadImage(image, namePhoto).execute();
-////                uploadImage.execute();
                 uploadImage = new UploadImage(image, namePhoto);
+                processPayment();
                 uploadImage.execute();
-                addAnnouncement(uploadImage.getPhotoName());
             }
         });
         return root;
     }
+
+    private void processPayment() {
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(cost)), "PLN", "Announcement", PayPalPayment.PAYMENT_INTENT_SALE);
+        Intent intent = new Intent(getActivity(), PaymentActivity.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -109,6 +182,19 @@ public class AddAnnouncementFragment extends Fragment {
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             imageViewUploadImage.setImageURI(selectedImage);
+        }
+        if (requestCode == PAYPAL_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if (confirmation != null) {
+                    addAnnouncement(uploadImage.getPhotoName());
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
+            }
+        } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
+            Toast.makeText(getActivity(), "Invalid", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -142,7 +228,7 @@ public class AddAnnouncementFragment extends Fragment {
             HttpParams httpRequestParams = getHttpRequestParams();
 
             HttpClient client = new DefaultHttpClient(httpRequestParams);
-            HttpPost post = new HttpPost(SERVER_ADRESS +"SavePicture.php");
+            HttpPost post = new HttpPost(SERVER_ADRESS + "SavePicture.php");
 
             try {
                 post.setEntity(new UrlEncodedFormEntity(dataToSend));
@@ -175,6 +261,7 @@ public class AddAnnouncementFragment extends Fragment {
         final String description = editTextDescription.getText().toString().trim();
         final String price = editTextPrice.getText().toString().trim();
         final String name_photo = n;
+        final String amount_month = et_how_month_add_ann.getText().toString().trim();
         //int userID;
 
         if (TextUtils.isEmpty(title)) {
@@ -196,8 +283,14 @@ public class AddAnnouncementFragment extends Fragment {
             return;
         }
 
-        if(SharedPrefManager.getInstance(getActivity().getApplicationContext()).isLoggedIn()){
-             userID = SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getId();
+        if (TextUtils.isEmpty(amount_month)) {
+            et_how_month_add_ann.setError("Please enter a amount month");
+            et_how_month_add_ann.requestFocus();
+            return;
+        }
+
+        if (SharedPrefManager.getInstance(getActivity().getApplicationContext()).isLoggedIn()) {
+            userID = SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getId();
         }
 
         class AddAnnouncement extends AsyncTask<Void, Void, String> {
@@ -208,19 +301,22 @@ public class AddAnnouncementFragment extends Fragment {
             @Override
             protected String doInBackground(Void... voids) {
                 RequestHandler requestHandler = new RequestHandler();
-                String user_id=Integer.toString(userID);
-                System.out.println("UserID"+ user_id);
+                String user_id = Integer.toString(userID);
+                System.out.println("UserID" + user_id);
                 System.out.println("Namephoto" + name_photo);
                 System.out.println("price " + price);
                 System.out.println("title " + title);
                 System.out.println("description " + description);
+                System.out.println("amount_month " + amount_month);
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
+
                 params.put("title", title);
                 params.put("description", description);
                 params.put("price", price);
-                params.put("name_photo", name_photo+".jpg");
+                params.put("name_photo", name_photo + ".jpg");
                 params.put("user_id", user_id);
+                params.put("amount_month", amount_month);
 
                 //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_ADDANNOUNCEMENT, params);
@@ -247,7 +343,7 @@ public class AddAnnouncementFragment extends Fragment {
 //
 
                         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
-                navigationView.getMenu().performIdentifierAction(R.id.nav_all_announcement, 0);
+                        navigationView.getMenu().performIdentifierAction(R.id.nav_all_announcement, 0);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
