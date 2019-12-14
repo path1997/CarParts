@@ -37,8 +37,6 @@ public class ProductListCustomAdapter extends ArrayAdapter<String> {
         View listViewItem = inflater.inflate(R.layout.listview_layout, null, true);
         TextView  nameTx = (TextView) listViewItem.findViewById(R.id.txname);
         TextView  priceTx = (TextView) listViewItem.findViewById(R.id.txprice);
-        // TextView textView = (TextView) listViewItem.findViewById(R.id.tvurl);
-        //  textView.setText(urls[position] );
         nameTx.setText(name[position] );
         priceTx.setText("Cena: "+price[position]+"zł" );
         ImageView image = (ImageView) listViewItem.findViewById(R.id.imimage);

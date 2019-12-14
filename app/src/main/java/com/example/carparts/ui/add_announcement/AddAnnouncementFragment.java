@@ -108,6 +108,9 @@ public class AddAnnouncementFragment extends Fragment {
 
         et_how_month_add_ann = (EditText) root.findViewById(R.id.et_how_month_add_ann);
 
+        tv_cost_add_ann.setEnabled(false);
+        tv_cost_add_ann.setText("Total cost: " + 0 + "zł");
+
         et_how_month_add_ann.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
 
@@ -119,32 +122,44 @@ public class AddAnnouncementFragment extends Fragment {
                         cost = Math.round(cost * 100.) / 100.;
                     }
                     if (sum >= 3 && sum < 6) {
-                        cost = COST_ANNOUNCEMENT * sum * 0.8;
+                        cost = COST_ANNOUNCEMENT * sum * 0.85;
                         cost = Math.round(cost * 100.) / 100.;
                     }
                     if (sum >= 6 && sum < 9) {
-                        cost = COST_ANNOUNCEMENT * sum * 0.7;
+                        cost = COST_ANNOUNCEMENT * sum * 0.80;
                         cost = Math.round(cost * 100.) / 100.;
                     }
                     if (sum >= 9 && sum < 12) {
-                        cost = COST_ANNOUNCEMENT * sum * 0.6;
+                        cost = COST_ANNOUNCEMENT * sum * 0.75;
                         cost = Math.round(cost * 100.) / 100.;
                     }
                     if (sum >= 12) {
-                        cost = COST_ANNOUNCEMENT * sum * 0.5;
+                        cost = COST_ANNOUNCEMENT * sum * 0.60;
                         cost = Math.round(cost * 100.) / 100.;
                     }
+                    System.out.println("Obliczylem hajs!");
+                    tv_cost_add_ann.setEnabled(true);
+                    tv_cost_add_ann.setText("Total cost: " + cost + "zł");
+                }
+                else{
+
+                    tv_cost_add_ann.setText("Total cost: " + 0 + "zł");
+                    tv_cost_add_ann.setEnabled(false);
                 }
             }
+
+
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                System.out.println("Wypisuje zmiane hajsu w ogloszeniach");
             }
         });
 
-        tv_cost_add_ann.setText("Total cost: " + cost + "zł");
+
+
 
         root.findViewById(R.id.btn_add_image).setOnClickListener(new View.OnClickListener() {
             @Override

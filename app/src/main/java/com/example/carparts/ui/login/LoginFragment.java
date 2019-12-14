@@ -338,7 +338,6 @@ public class LoginFragment extends Fragment {
         PostCode.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getPostcode());
         City.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getCity());
         Address.setText(SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser().getAddress());
-
-
     }
+
 }
