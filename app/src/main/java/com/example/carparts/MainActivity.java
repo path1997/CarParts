@@ -53,15 +53,26 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         MenuItem nav_login = menu.findItem(R.id.nav_login);
+        MenuItem nav_myorders = menu.findItem(R.id.nav_my_orders);
+        MenuItem nav_addanouncement = menu.findItem(R.id.nav_add_announcement);
+        MenuItem nav_myanouncement = menu.findItem(R.id.nav_my_announcement);
         View header = navigationView.getHeaderView(0);
         TextView textView= (TextView) header.findViewById(R.id.textView);
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             //textView.setText("Witaj "+SharedPrefManager.getUserName());
             textView.setText("Hi "+ SharedPrefManager.getUserName());
             nav_login.setTitle("My account");
+            nav_myorders.setVisible(true);
+            nav_addanouncement.setVisible(true);
+            nav_myanouncement.setVisible(true);
 
         } else {
             textView.setText("You are not logged in");
+            nav_myorders.setVisible(false);
+            nav_addanouncement.setVisible(false);
+            nav_myanouncement.setVisible(false);
+
+
         }
 
        /* final Fragment[] fragment = {null};

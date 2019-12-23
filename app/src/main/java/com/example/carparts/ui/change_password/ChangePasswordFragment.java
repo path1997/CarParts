@@ -74,6 +74,7 @@ public class ChangePasswordFragment extends Fragment {
         if(!password2.equals(password3)){
             Password3.setError("The password is not the same");
             Password3.requestFocus();
+            return;
         }
 
         class ChangePassword extends AsyncTask<Void, Void, String> {

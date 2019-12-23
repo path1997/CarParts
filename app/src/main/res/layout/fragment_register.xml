@@ -22,13 +22,14 @@
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/buttonRegister"
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="80dp">
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,116 +38,210 @@
             android:layout_marginVertical="10dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView4"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="First name"
-                android:textSize="23sp" />
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-            <EditText
-                android:id="@+id/FName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="50"
+                    android:text="First name"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Second name"
-                android:textSize="23sp" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="50"
+                    android:text="Second name"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/SName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:inputType="text" />
+                android:layout_marginBottom="30sp"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <EditText
+                    android:id="@+id/FName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="50"
+                    android:inputType="text"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/SName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="50"
+                    android:inputType="text"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tx1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Phone number"
-                android:textSize="23sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/PhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30sp"
                 android:fontFamily="sans-serif"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Email"
-                android:textSize="23sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/Email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30sp"
                 android:fontFamily="sans-serif"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/textView3"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Password"
-                android:textSize="23sp" />
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-            <EditText
-                android:id="@+id/Password"
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="50"
+                    android:text="Password"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="50"
+                    android:text="Confirm password"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:inputType="textPassword" />
+                android:layout_marginBottom="30sp"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-            <TextView
-                android:id="@+id/textView7"
+                <EditText
+                    android:id="@+id/Password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="50"
+                    android:fontFamily="sans-serif"
+                    android:inputType="textPassword"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/Password1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="50"
+                    android:fontFamily="sans-serif"
+                    android:inputType="textPassword"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Post code"
-                android:textSize="23sp" />
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-            <EditText
-                android:id="@+id/PostCode"
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="70"
+                    android:text="Post code"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="30"
+                    android:text="City"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:inputType="textPostalAddress" />
+                android:layout_marginBottom="30sp"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="City"
-                android:textSize="23sp" />
+                <EditText
+                    android:id="@+id/PostCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="70"
+                    android:fontFamily="sans-serif"
+                    android:inputType="textPostalAddress"
+                    android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/City"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/City"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="30"
+                    android:fontFamily="sans-serif"
+                    android:inputType="text"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Address"
-                android:textSize="23sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/Address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20sp"
                 android:fontFamily="sans-serif"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>

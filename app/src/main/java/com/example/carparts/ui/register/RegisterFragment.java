@@ -43,7 +43,7 @@ import java.util.HashMap;
 
 public class RegisterFragment extends Fragment {
 
-    EditText Fname,SName,PhoneNumber,Email,PostCode,City,Address,Password;
+    EditText Fname,SName,PhoneNumber,Email,PostCode,City,Address,Password,Password1;
     View root;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class RegisterFragment extends Fragment {
         City = (EditText) root.findViewById(R.id.City);
         Address = (EditText) root.findViewById(R.id.Address);
         Password = (EditText) root.findViewById(R.id.Password);
+        Password1 = (EditText) root.findViewById(R.id.Password1);
         ((MainActivity) getActivity()).setActionBarTitle("Register");
 
         root.findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
@@ -75,6 +76,7 @@ public class RegisterFragment extends Fragment {
         final String fname = Fname.getText().toString().trim();
         final String sname = SName.getText().toString().trim();
         final String password = Password.getText().toString().trim();
+        final String password1 = Password1.getText().toString().trim();
         final String phone = PhoneNumber.getText().toString().trim();
         final String email = Email.getText().toString().trim();
         final String postcode = PostCode.getText().toString().trim();
@@ -128,6 +130,11 @@ public class RegisterFragment extends Fragment {
         if (TextUtils.isEmpty(password)) {
             Password.setError("Enter a password");
             Password.requestFocus();
+            return;
+        }
+        if (!password.equals(password1)) {
+            Password1.setError("The password is not the same");
+            Password1.requestFocus();
             return;
         }
 
