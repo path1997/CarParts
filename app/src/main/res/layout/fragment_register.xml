@@ -3,20 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/add_ann_background">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:text="Register"
-        android:textAlignment="center"
-        android:textSize="30sp" />
 
     <ScrollView
         android:id="@+id/scrollview"
@@ -29,39 +18,17 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="100">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10sp"
-                    android:layout_weight="50"
-                    android:text="First name"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10sp"
-                    android:layout_weight="50"
-                    android:text="Second name"
-                    android:textSize="20sp" />
-            </LinearLayout>
+            android:orientation="vertical"
+            android:background="@drawable/rounded_edge"
+            android:padding="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10sp"
                     android:layout_weight="50"
+                    android:hint="First name"
                     android:inputType="text"
                     android:textSize="16sp" />
 
@@ -85,16 +53,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp"
                     android:layout_weight="50"
+                    android:hint="Last name"
                     android:inputType="text"
                     android:textSize="16sp" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tx1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phone number"
-                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/PhoneNumber"
@@ -102,15 +64,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30sp"
                 android:fontFamily="sans-serif"
+                android:hint="Phone Number"
                 android:inputType="phone"
                 android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/Email"
@@ -118,33 +74,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30sp"
                 android:fontFamily="sans-serif"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="100">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10sp"
-                    android:layout_weight="50"
-                    android:text="Password"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10sp"
-                    android:layout_weight="50"
-                    android:text="Confirm password"
-                    android:textSize="20sp" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -160,6 +92,7 @@
                     android:layout_marginRight="10sp"
                     android:layout_weight="50"
                     android:fontFamily="sans-serif"
+                    android:hint="Password"
                     android:inputType="textPassword"
                     android:textSize="16sp" />
 
@@ -170,33 +103,9 @@
                     android:layout_marginLeft="10sp"
                     android:layout_weight="50"
                     android:fontFamily="sans-serif"
+                    android:hint="Confirm password"
                     android:inputType="textPassword"
                     android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="100">
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10sp"
-                    android:layout_weight="70"
-                    android:text="Post code"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10sp"
-                    android:layout_weight="30"
-                    android:text="City"
-                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -213,6 +122,7 @@
                     android:layout_marginRight="10sp"
                     android:layout_weight="70"
                     android:fontFamily="sans-serif"
+                    android:hint="Post code"
                     android:inputType="textPostalAddress"
                     android:textSize="16sp" />
 
@@ -223,16 +133,10 @@
                     android:layout_marginLeft="10sp"
                     android:layout_weight="30"
                     android:fontFamily="sans-serif"
+                    android:hint="City"
                     android:inputType="text"
                     android:textSize="16sp" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Address"
-                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/Address"
@@ -240,6 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
                 android:fontFamily="sans-serif"
+                android:hint="Address"
                 android:inputType="text"
                 android:textSize="16sp" />
 
@@ -253,7 +158,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_gradient_upload_image"
+        android:layout_marginHorizontal="50dp"
         android:text="Register" />
     <ProgressBar
         android:visibility="gone"

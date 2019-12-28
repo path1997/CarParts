@@ -42,11 +42,11 @@ public class Cart extends AppCompatActivity {
     int pusty;
     static void minussum(int value){
         suma-=value;
-        wartosczamowienia.setText("Total order value : "+suma+"zł");
+        wartosczamowienia.setText("Total value : "+suma+"zł");
     }
     static void plussum(int value){
         suma+=value;
-        wartosczamowienia.setText("Total order value : "+suma+"zł");
+        wartosczamowienia.setText("Total value : "+suma+"zł");
     }
 
     @Override
@@ -129,7 +129,7 @@ public class Cart extends AppCompatActivity {
                         customadapter = new CartProductListCustomAdapter(Cart.this,cid,idz,name,path,price,quantity,0 );
                         listView.setAdapter(customadapter);
 
-                        wartosczamowienia.setText("Total order value : "+suma+"zł");
+                        wartosczamowienia.setText("Total value : "+suma+"zł");
                         wartosczamowienia.setGravity(Gravity.CENTER);
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override

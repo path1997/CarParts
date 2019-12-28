@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.delivery.Delivery">
+    android:orientation="vertical"
+    tools:context=".ui.delivery.Delivery"
+    android:background="@color/add_ann_background">
 
 
     <ProgressBar
@@ -15,106 +17,121 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
-    <TextView
-        android:id="@+id/tx1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="0dp"
-        android:text="Choose a delivery method"
-        android:textAlignment="center"
-        android:textSize="26sp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:background="@drawable/rounded_edge">
 
-    <TextView
-        android:id="@+id/tx2"
+        <TextView
+            android:id="@+id/tx1"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:text="Choose a delivery method"
+            android:textAlignment="center"
+            android:textSize="26sp" />
+
+        <RadioGroup
+            android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp">
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Shipment by post +9zł"
+                android:buttonTint="@color/colorPrimary"/>
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shipment by courier +15zł"
+                android:buttonTint="@color/colorPrimary"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/radio1"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="0dp"
-        android:text="Choose a payment method"
-        android:textAlignment="center"
-        android:textSize="26sp" />
-
-    <RadioGroup
-        android:id="@+id/radio2"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tx2"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp">
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:background="@drawable/rounded_edge">
 
-        <RadioButton
-            android:id="@+id/radioButton5"
+        <TextView
+            android:id="@+id/tx2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PayPal"
-            android:checked="true"/>
+            android:layout_height="40dp"
+            android:layout_below="@+id/radio1"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:text="Choose a payment method"
+            android:textAlignment="center"
+            android:textSize="26sp" />
 
-        <RadioButton
-            android:id="@+id/radioButton6"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/radio2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cash on delivery +10zł" />
-    </RadioGroup>
+            android:layout_below="@+id/tx2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp">
 
-    <RadioGroup
-        android:id="@+id/radio1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tx1"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp">
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="PayPal"
+                android:buttonTint="@color/colorPrimary"/>
 
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Shipment by post +9zł"
-            android:checked="true"/>
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Shipment by courier +15zł" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/radioButton6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cash on delivery +10zł"
+                android:buttonTint="@color/colorPrimary"/>
+        </RadioGroup>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/Totalcost"
-        android:layout_width="wrap_content"
+        android:layout_width="189dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/radio2"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="23dp"
-        android:textSize="23sp"/>
+        android:layout_marginEnd="0dp"
+        android:textSize="23sp" />
 
     <Button
         android:id="@+id/btcheckout"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:text="Checkout" />
+        android:layout_marginTop="20dp"
+        android:text="Checkout"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/btn_gradient_upload_image"/>
 
-</RelativeLayout>
+</LinearLayout>
