@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/add_ann_background">
 
 
     <ScrollView
@@ -15,48 +16,61 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/add_ann_background"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/et_title_add_ann"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:ems="10"
-                android:hint="Title"
-                android:inputType="textPersonName" />
 
-            <EditText
-                android:id="@+id/et_price_add_ann"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:ems="10"
-                android:hint="Price"
-                android:inputType="number|numberDecimal|phone" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_edge"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/et_description_add_ann"
-                android:layout_width="match_parent"
-                android:layout_height="73dp"
-                android:layout_margin="16dp"
-                android:ems="10"
-                android:hint="Description"
-                android:inputType="textShortMessage|text"
-                android:textAlignment="viewStart" />
+                <EditText
+                    android:id="@+id/et_title_add_ann"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="Title"
+                    android:inputType="textPersonName" />
 
-            <EditText
-                android:id="@+id/et_how_month_add_ann"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:ems="10"
-                android:hint="How Month"
-                android:inputType="number|numberDecimal|phone"
-                android:orientation="vertical"
-                android:textAlignment="center"
-                android:textSize="8sp" />
+                <EditText
+                    android:id="@+id/et_price_add_ann"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="Price"
+                    android:inputType="number|numberDecimal|phone" />
+
+                <EditText
+                    android:id="@+id/et_description_add_ann"
+                    android:layout_width="match_parent"
+                    android:layout_height="73dp"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="Description"
+                    android:inputType="textShortMessage|text"
+                    android:textAlignment="viewStart" />
+
+                <EditText
+                    android:id="@+id/et_how_month_add_ann"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:ems="10"
+                    android:hint="How Month"
+                    android:inputType="number|numberDecimal|phone"
+                    android:orientation="vertical"
+                    android:textAlignment="center"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_cost_add_ann"
@@ -69,10 +83,10 @@
                 android:id="@+id/btn_add_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="110dp"
+                android:layout_marginLeft="85dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="110dp"
-                android:background="@drawable/round_button_add_image"
+                android:layout_marginRight="85dp"
+                android:background="@drawable/btn_gradient_upload_image"
                 android:text="UPLOAD IMAGE" />
 
             <ImageView
@@ -86,10 +100,10 @@
                 android:id="@+id/btn_add_ann"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginRight="60dp"
-                android:background="@drawable/round_button_add_ann"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/btn_gradient_add_ann"
                 android:text="ADD"
                 android:textSize="25sp" />
 

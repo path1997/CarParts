@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="btn_add_im_color">#E7AC54</color>
     <color name="btn_add_ann_color">#A27739</color>
+    <color name="add_ann_background">#EEEEEE</color>
+    <color name="add_ann_background1">#FFFFFF</color>
 </resources>

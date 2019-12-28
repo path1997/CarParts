@@ -113,6 +113,15 @@ public class MyAnnouncementFragment extends Fragment {
                                 startActivity(intent);
                             }
                         });
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(getActivity().getApplicationContext(), AnnouncementDetail.class);
+                                String idP=ida[position];
+                                intent.putExtra("id_announcement", idP);
+                                startActivity(intent);
+                            }
+                        });
                     }
 
                 } catch (JSONException e) {
