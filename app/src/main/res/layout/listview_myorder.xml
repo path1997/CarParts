@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/add_ann_background">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_edge"
         android:padding="15dp">
 
         <TextView
@@ -25,8 +30,8 @@
 
         <TextView
             android:id="@+id/ordercost"
-            android:layout_width="120dp"
-            android:layout_height="53dp"
+            android:layout_width="138dp"
+            android:layout_height="51dp"
             android:layout_below="@+id/ordername"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
