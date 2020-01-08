@@ -1,6 +1,8 @@
 package com.example.carparts.ui.register;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -44,7 +47,9 @@ import java.util.HashMap;
 public class RegisterFragment extends Fragment {
 
     EditText Fname,SName,PhoneNumber,Email,PostCode,City,Address,Password,Password1;
+    TextView Regulations;
     View root;
+    CheckBox checkBox;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -59,12 +64,30 @@ public class RegisterFragment extends Fragment {
         Address = (EditText) root.findViewById(R.id.Address);
         Password = (EditText) root.findViewById(R.id.Password);
         Password1 = (EditText) root.findViewById(R.id.Password1);
+        checkBox= (CheckBox) root.findViewById(R.id.checkbox);
+        Regulations=(TextView) root.findViewById(R.id.regulations);
         ((MainActivity) getActivity()).setActionBarTitle("Register");
 
         root.findViewById(R.id.buttonRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerUser();
+            }
+        });
+        root.findViewById(R.id.regulations).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder adbuilder = new AlertDialog.Builder(getContext());
+                adbuilder.setMessage("This is window from regulations")
+                        .setCancelable(false)
+                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setTitle("Regulation");
+                adbuilder.show();
             }
         });
 
@@ -95,6 +118,7 @@ public class RegisterFragment extends Fragment {
             SName.requestFocus();
             return;
         }
+
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Email.setError("Enter a valid email");
             Email.requestFocus();
@@ -135,6 +159,11 @@ public class RegisterFragment extends Fragment {
         if (!password.equals(password1)) {
             Password1.setError("The password is not the same");
             Password1.requestFocus();
+            return;
+        }
+        if(!checkBox.isChecked()){
+            Regulations.setError("Please accept regulations");
+            Regulations.requestFocus();
             return;
         }
 
