@@ -26,7 +26,7 @@ public class ContactFragment extends Fragment {
         contactViewModel = ViewModelProviders.of(this).get(ContactViewModel.class);
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
-        final String[] contacts = {"Call to us", "Write to us", "Find us"};
+        final String[] contacts = {"634842744", "car@parts.cp", "Find us"};
         Integer[] imgid = {R.drawable.ic_contact_call, R.drawable.ic_contact_email, R.drawable.ic_contact_navigation};
         listView = (ListView) view.findViewById(R.id.lv_contact);
 
