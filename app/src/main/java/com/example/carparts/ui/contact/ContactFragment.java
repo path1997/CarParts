@@ -40,7 +40,7 @@ public class ContactFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:0123456789"));
+                    intent.setData(Uri.parse("tel:634842744"));
                     startActivity(intent);
                 }
                 if (position == 1) {

@@ -34,6 +34,9 @@
         android:layout_marginTop="21dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:textAlignment="gravity"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
 
 </RelativeLayout>
