@@ -138,7 +138,7 @@ public class ProductDetail extends AppCompatActivity {
                         tvTitle.setText(name[0]);
                         tvAvailable.setText("Available: "+String.valueOf(available[0])+" pieces");
                         tvDescription.setText(description[0]);
-                        tvPrice.setText("Cena: "+price[0]+"zł");
+                        tvPrice.setText("Price: "+price[0]+"zł");
                         if(available[0]>0){
                             buy.setEnabled(true);
                         }

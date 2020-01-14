@@ -4,7 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.my_orders.MyOrderDetail">
+    tools:context=".ui.my_orders.MyOrderDetail"
+    android:background="@color/add_ann_background">
 
 
     <TextView
@@ -17,54 +18,18 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="4dp"
-        android:text="TextView"
         android:textAlignment="center"
-        android:textSize="24sp"/>
-
-    <TextView
-        android:id="@+id/orderdate"
-        android:layout_width="390dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ordercost"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="5dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/ordercost"
-        android:layout_width="388dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/orderpayment"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="5dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/orderpayment"
-        android:layout_width="388dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="9dp"
-        android:text="TextView" />
+        android:textSize="24sp" />
 
     <ListView
         android:id="@+id/listvieworderdetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/orderdate"
+        android:layout_height="442dp"
+        android:layout_above="@+id/okr"
         android:layout_below="@+id/ordername"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="0dp" />
+
     <ProgressBar
         android:visibility="gone"
         android:id="@+id/progressBar"
@@ -72,4 +37,36 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
+
+    <LinearLayout
+        android:id="@+id/okr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        android:padding="15dp"
+        android:background="@drawable/rounded_edge"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/orderdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/ordercost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/orderpayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+    </LinearLayout>
+
 </RelativeLayout>

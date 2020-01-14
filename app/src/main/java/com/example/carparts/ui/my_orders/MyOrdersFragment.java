@@ -61,7 +61,7 @@ public class MyOrdersFragment extends Fragment {
                     JSONObject obj = new JSONObject(s);
 
                     if (!obj.getBoolean("error")) {
-                        Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         JSONArray jsonArray = obj.getJSONArray("orders");
 
                         ida=new String[jsonArray.length()];;

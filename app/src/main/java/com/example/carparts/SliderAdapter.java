@@ -48,7 +48,7 @@ public class SliderAdapter extends
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -60,7 +60,7 @@ public class SliderAdapter extends
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
                 Glide.with(viewHolder.itemView)
                         .load(URLs.URL_PPHOTO+path[0])
-                        .fitCenter()
+                        .centerCrop()
                         .into(viewHolder.imageViewBackground);
                 break;
             case 1:
@@ -69,7 +69,7 @@ public class SliderAdapter extends
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
                 Glide.with(viewHolder.itemView)
                         .load(URLs.URL_PPHOTO+path[1])
-                        .fitCenter()
+                        .centerCrop()
                         .into(viewHolder.imageViewBackground);
                 break;
             case 2:
@@ -78,7 +78,7 @@ public class SliderAdapter extends
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
                 Glide.with(viewHolder.itemView)
                         .load(URLs.URL_PPHOTO+path[2])
-                        .fitCenter()
+                        .centerCrop()
                         .into(viewHolder.imageViewBackground);
                 break;
 
