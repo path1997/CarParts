@@ -82,7 +82,7 @@ public class MyAnnouncementFragment extends Fragment {
                     System.out.println("response: " + s);
                     JSONObject obj = new JSONObject(s);
                     if (!obj.getBoolean("error")) {
-                        Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity().getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         JSONArray jsonArray = obj.getJSONArray("myannouncement");
 
                         ida = new String[jsonArray.length()];

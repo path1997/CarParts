@@ -173,10 +173,7 @@ public class AddAnnouncementFragment extends Fragment {
         root.findViewById(R.id.btn_add_ann).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap image = ((BitmapDrawable) imageViewUploadImage.getDrawable()).getBitmap();
-                uploadImage = new UploadImage(image, namePhoto);
                 processPayment();
-                uploadImage.execute();
             }
         });
         return root;
@@ -202,6 +199,9 @@ public class AddAnnouncementFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if (confirmation != null) {
+                    Bitmap image = ((BitmapDrawable) imageViewUploadImage.getDrawable()).getBitmap();
+                    uploadImage = new UploadImage(image, namePhoto);
+                    uploadImage.execute();
                     addAnnouncement(uploadImage.getPhotoName());
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
@@ -257,7 +257,7 @@ public class AddAnnouncementFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(getActivity().getApplicationContext(), "Image Uploaded", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity().getApplicationContext(), "Image Uploaded", Toast.LENGTH_SHORT).show();
             System.out.println("wyslalem image upload");
         }
     }

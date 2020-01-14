@@ -35,7 +35,7 @@
             android:layout_marginEnd="84dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/my_order_edit_btn"
@@ -62,7 +62,7 @@
             android:layout_marginEnd="83dp"
             android:layout_toEndOf="@+id/imimage"
             android:text="TextView"
-            android:textSize="20sp" />
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/my_order_delete_btn"
@@ -89,6 +89,7 @@
             android:layout_marginEnd="83dp"
             android:layout_toEndOf="@+id/imimage"
             android:text=""
+            android:visibility="gone"
             android:textSize="12sp" />
 
     </RelativeLayout>
