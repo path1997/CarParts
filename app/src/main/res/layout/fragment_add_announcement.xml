@@ -45,7 +45,7 @@
                     android:layout_margin="16dp"
                     android:ems="10"
                     android:hint="Price"
-                    android:inputType="none|numberSigned|numberDecimal|numberPassword" />
+                    android:inputType="numberSigned|numberDecimal" />
 
                 <EditText
                     android:id="@+id/et_description_add_ann"
@@ -65,7 +65,7 @@
                     android:layout_margin="16dp"
                     android:ems="10"
                     android:hint="How Month"
-                    android:inputType="none|numberSigned|numberDecimal|numberPassword"
+                    android:inputType="numberSigned|numberDecimal"
                     android:orientation="vertical"
                     android:textAlignment="center"
                     android:textSize="14sp" />
