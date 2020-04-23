@@ -71,7 +71,7 @@ public class AddAnnouncementFragment extends Fragment {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
 
-    private static final String SERVER_ADRESS = "http://13.80.137.25/android/";
+    private static final String SERVER_ADRESS = "http://carparts.5v.pl/android/";
     protected int userID;
 
     private AddAnnouncementViewModel addAnnouncementViewModel;
